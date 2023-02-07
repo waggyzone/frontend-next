@@ -9,6 +9,7 @@ import { useRef, useState } from "react";
 import { toast } from "react-hot-toast";
 import { GetServerSideProps } from "next";
 import { product } from "../types/types";
+import Router from "next/router";
 
 const initialValue = {
   name: "",
@@ -25,6 +26,7 @@ const Product: NextPage<{ slug?: string[]; data?: product }> = ({ slug = "add", 
       .then((promise) => {
         if (promise) {
           toast.success("New product Added");
+          Router.replace(`/product`)
         } else {
           toast.loading("Something went wrong");
         }
@@ -39,6 +41,7 @@ const Product: NextPage<{ slug?: string[]; data?: product }> = ({ slug = "add", 
       .then((promise) => {
         if (promise) {
           toast.success("Product Updated");
+           Router.replace(`/product`)
         } else {
           toast.loading("Something went wrong");
         }
@@ -134,7 +137,6 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   if (slug[0] === "edit") {
     result = await ProductService.findById(slug[1]).then((promise) => promise[0]);
   }
-
   return {
     props: {
       slug: slug,
