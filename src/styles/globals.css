@@ -1,0 +1,57 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@layer components {
+  .login {
+    @apply w-screen h-screen bg-gradient-to-r from-cyan-500
+     to-blue-500 flex justify-center items-center;
+  }
+  .login__container {
+    @apply flex flex-col justify-between items-center gap-2 bg-white pb-32 px-10 rounded-lg;
+  }
+  .login__container__input {
+    @apply h-11 w-96  rounded-lg px-2 text-start justify-center outline-none border border-slate-900;
+  }
+  .login__container__button {
+    @apply pt-7 w-full shadow-xl transition-all scale-105;
+  }
+  .login__container__button button {
+    @apply w-full;
+  }
+  .login__container__header {
+    @apply bg-red-400 w-full h-full pt-20 mb-10 rounded-b-md flex text-center items-center justify-center shadow-md;
+  }
+  .login__container__header h1 {
+    @apply text-2xl mb-10 text-emerald-600 shadow-slate-600;
+  }
+  .formik {
+    @apply flex flex-col;
+  }
+  .formik__label {
+    @apply text-slate-900 text-xl mt-4 mb-2;
+  }
+  .register {
+    @apply relative w-screen h-screen bg-gradient-to-tr from-violet-500 to-orange-300;
+  }
+  .register__container {
+    @apply container m-auto items-center flex h-screen justify-center;
+  }
+  .register__container form {
+    @apply bg-slate-200 pt-32 pb-28 px-20 rounded-lg shadow-2xl;
+  }
+  .register__container__button {
+    @apply bg-gradient-to-r from-blue-700 via-blue-800 to-gray-600 w-full h-12 rounded-md mt-7 text-white;
+  }
+  .fourohfour {
+    @apply bg-gradient-to-b from-gray-900 to-gray-600 w-screen h-screen relative;
+  }
+  .fourohfour__lottie {
+    @apply w-screen h-screen absolute top-0 left-0;
+  }
+  .fourohfour__button {
+    @apply absolute bottom-[15%] right-[10%] bg-orange-600 rounded-lg h-10 w-fit p-4 flex justify-center items-center text-lg shadow-md shadow-slate-400 hover:scale-125 transition-all;
+  }
+  .layout {
+    @apply w-screen h-screen flex-1 flex justify-center  bg-gradient-to-br from-rose-100 to-teal-100;
+  }
+}/*# sourceMappingURL=globals.css.map */
