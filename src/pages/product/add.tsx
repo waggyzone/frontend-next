@@ -1,4 +1,4 @@
-//@ts-nocheck
+//@ts-check
 import { CreateProductValidationSchema } from "@/common/helper";
 import InputBox from "@/component/FormikField/InputBox";
 import StraightLoader from "@/component/Loader/StraightLoader";
@@ -7,8 +7,6 @@ import { Form, Formik } from "formik";
 import { NextPage } from "next";
 import { useRef, useState } from "react";
 import { toast } from "react-hot-toast";
-import { GetServerSideProps } from "next";
-import { product } from "../types/types";
 
 const initialValue = {
   name: "",
@@ -16,11 +14,11 @@ const initialValue = {
   price: 0,
 };
 
-const Product: NextPage<{ slug?: string[]; data?: product }> = ({ slug = "add", data }) => {
+const Product: NextPage = () => {
   const addProductFormikRef = useRef();
   const [loader, setLoader] = useState<Boolean>(false);
 
-  const createProduct = (values: typeof initialValue) => {
+  const onCreateProductFormSubmit = (values: typeof initialValue) => {
     ProductService.create(values)
       .then((promise) => {
         if (promise) {
@@ -34,29 +32,6 @@ const Product: NextPage<{ slug?: string[]; data?: product }> = ({ slug = "add", 
       });
   };
 
-  const updateProduct = (id: string, values: typeof initialValue) => {
-    ProductService.update(id, values)
-      .then((promise) => {
-        if (promise) {
-          toast.success("Product Updated");
-        } else {
-          toast.loading("Something went wrong");
-        }
-      })
-      .catch((error) => {
-        toast.error(error);
-      });
-  };
-
-  const onCreateProductFormSubmit = (values: typeof initialValue) => {
-    if (slug[0] === "add") {
-      createProduct(values);
-    }
-    if (slug[0] === "edit") {
-      updateProduct(slug[1], values);
-    }
-  };
-
   /**
    * @namespace Register
    * @function handleChange
@@ -67,7 +42,7 @@ const Product: NextPage<{ slug?: string[]; data?: product }> = ({ slug = "add", 
     //@ts-ignore
     addProductFormikRef.current.setFieldValue(data.target.name, data.target.value);
   };
-  console.log("firest", data);
+
   return (
     <div className="register">
       <div className="register__container">
@@ -86,7 +61,6 @@ const Product: NextPage<{ slug?: string[]; data?: product }> = ({ slug = "add", 
               label="Product Name"
               name="name"
               type="text"
-              value={data?.name}
               placeholder="Enter a Product Name"
               onChange={(event: any) => handleChange(event)}
             />
@@ -97,7 +71,6 @@ const Product: NextPage<{ slug?: string[]; data?: product }> = ({ slug = "add", 
               label="BrandName Name"
               name="brandname"
               type="text"
-              value={data?.brandname}
               placeholder="Enter a Product Brand Name"
               onChange={(event: any) => handleChange(event)}
             />
@@ -108,7 +81,6 @@ const Product: NextPage<{ slug?: string[]; data?: product }> = ({ slug = "add", 
               label="Product Price"
               name="price"
               type="number"
-              value={data?.price}
               placeholder="Enter a Product Price"
               onChange={(event: any) => handleChange(event)}
             />
@@ -126,21 +98,6 @@ const Product: NextPage<{ slug?: string[]; data?: product }> = ({ slug = "add", 
       </div>
     </div>
   );
-};
-
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const slug = (ctx.query.slug as string[]) ?? [];
-  let result;
-  if (slug[0] === "edit") {
-    result = await ProductService.findById(slug[1]).then((promise) => promise[0]);
-  }
-
-  return {
-    props: {
-      slug: slug,
-      data: result || {},
-    },
-  };
 };
 
 export default Product;
