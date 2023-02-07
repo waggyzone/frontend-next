@@ -36,10 +36,7 @@ const Product: NextPage<{ data: [product] }> = ({ data }) => {
   );
 };
 
-// Product.getInitialProps = async (context) => {
-//   const result = await ProductService.findAll().then((promise) => promise);
-//   return { data: result };
-// };
+
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const result = await ProductService.findAll().then((promise) => promise);
   return {
