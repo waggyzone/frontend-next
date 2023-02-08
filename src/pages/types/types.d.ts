@@ -9,7 +9,7 @@ export type createUser = {
 }
 
 export type product = {
-  _id: string | number | undefined
+  _id?: string;
   name: string,
   brandname: string,
   price: number

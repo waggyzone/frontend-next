@@ -16,6 +16,22 @@ class ProductService {
       .catch((error) => {
         throw new Error(error);
       });
+  findById = async (id: string) =>
+    await apiClient
+      .get(`/product/find/${id}`)
+      .then((promise) => promise.data)
+      .catch((error) => {
+        throw new Error(error);
+      });
+  update = async (id: string, params: product) =>
+    await apiClient
+      .put(`/product/update/${id}`, params)
+      .then((promise) => promise.data)
+      .catch((error) => {
+        throw new Error(error);
+      });
 }
 
-export default new ProductService();
+const productService = new ProductService();
+
+export default productService;

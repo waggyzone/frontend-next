@@ -1,12 +1,12 @@
-import React from "react";
+import React, { MouseEventHandler } from "react";
 
 const Card: React.FC<{
   key?: string | number;
   title?: string;
   brandname?: string;
   price?: number;
-  onEdit?: () => void;
-  onDelete?: () => void;
+  onEdit?: MouseEventHandler<HTMLButtonElement>;
+  onDelete?: MouseEventHandler<HTMLButtonElement>;
 }> = ({ key, title, brandname, price, onEdit, onDelete }) => {
   return (
     <div className="rounded-md overflow-hidden shadow-lg bg-white" key={key}>
@@ -16,10 +16,10 @@ const Card: React.FC<{
           <p className="text-gray-700 text-base">{brandname}</p>
         </div>
         <div className="flex-[0.1] space-y-4">
-          <button className="bg-blue-500" onClick={onEdit(key)}>
+          <button className="bg-blue-500" onClick={onEdit}>
             Edit
           </button>
-          <button className="bg-red-500" onClick={onDelete(key)}>
+          <button className="bg-red-500" onClick={onDelete}>
             Delete
           </button>
         </div>

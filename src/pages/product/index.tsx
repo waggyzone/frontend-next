@@ -1,14 +1,17 @@
 import Card from "@/component/Card";
 import ProductService from "@/service/product";
-import { NextPage } from "next";
+import { GetServerSideProps, NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
 import Router from "next/router";
 import { product } from "../types/types";
 
+
 const Product: NextPage<{ data: [product] }> = ({ data }) => {
   console.log(data);
-  const onEditProduct = () => {};
+  const onEditProduct = (key: string | undefined) => {
+    Router.push(`/product/edit/${key}`);
+  };
   const onDeleteProduct = () => {};
   return (
     <div className="pt-32 w-screen">
@@ -24,7 +27,7 @@ const Product: NextPage<{ data: [product] }> = ({ data }) => {
             title={data.name}
             brandname={data.name}
             price={data.price}
-            onEdit={onEditProduct}
+            onEdit={() => onEditProduct(data._id)}
             onDelete={onDeleteProduct}
           />
         ))}
@@ -33,9 +36,14 @@ const Product: NextPage<{ data: [product] }> = ({ data }) => {
   );
 };
 
-Product.getInitialProps = async (context) => {
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const result = await ProductService.findAll().then((promise) => promise);
-  return { data: result };
+  return {
+    props: {
+      data: result 
+    },
+  };
 };
 
 export default Product;
