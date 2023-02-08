@@ -1,4 +1,4 @@
-import Card from "@/component/Card";
+import Card from "@/component/Card/product";
 import ProductService from "@/service/product";
 import { GetServerSideProps, NextPage } from "next";
 import Head from "next/head";

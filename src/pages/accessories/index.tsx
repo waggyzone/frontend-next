@@ -1,5 +1,5 @@
-import Card from "@/component/Card";
-import AccessoriesService from "@/service/product";
+import Card from "@/component/Card/accessories";
+import AccessoriesService from "@/service/accessories";
 import { GetServerSideProps, NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
