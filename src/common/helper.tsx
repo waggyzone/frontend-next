@@ -24,3 +24,12 @@ export const CreateProductValidationSchema = Yup.object().shape({
   brandname: Yup.string().required("Required"),
   price: Yup.number().required("Required").min(10, "Minimum price  10"),
 });
+
+export const CreateAccessoriesValidationSchema = Yup.object().shape({
+  name: Yup.string().required("Required"),
+  size: Yup.string().required("Required"),
+  price: Yup.number().required("Required").min(10, "Minimum price  10"),
+  color: Yup.string().required("Required"),
+  
+});
+

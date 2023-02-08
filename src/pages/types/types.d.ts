@@ -1,3 +1,4 @@
+import { type } from "os";
 
 
 export type createUser = {
@@ -13,4 +14,11 @@ export type product = {
   name: string,
   brandname: string,
   price: number
+}
+export type accessories = {
+  _id?: string;
+  name: string,
+  size: string,
+  price: number,
+  color: string
 }
