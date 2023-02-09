@@ -81,7 +81,7 @@ const Product: NextPage<{ slug?: string[]; data?: product }> = ({ slug = "add", 
           onSubmit={onCreateProductFormSubmit}
         >
           <Form>
-            <span className="text-3xl animate-pulse"> Create Product</span>
+            <span className="text-3xl animate-pulse capitalize"> {slug[0].toString()} Product</span>
             <InputBox
               inputClassName="login__container__input"
               labelClassName="login__container__label"

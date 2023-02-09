@@ -34,10 +34,10 @@ const Card: React.FC<{
           {color}
         </span>
        <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-          #travel
+          {size}
         </span>
         <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-          #winter
+          {price}
         </span>
       </div>
     </div>
