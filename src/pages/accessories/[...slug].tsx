@@ -81,7 +81,7 @@ const Accessories: NextPage<{ slug?: string[]; data?: accessories }> = ({ slug =
           onSubmit={onCreateAccessoriesFormSubmit}
         >
           <Form>
-            <span className="text-3xl animate-pulse"> Create Accessorie</span>
+            <span className="text-3xl animate-pulse capitalize"> {slug[0].toString()} Accessories</span>
             <InputBox
               inputClassName="login__container__input"
               labelClassName="login__container__label"

@@ -14,6 +14,7 @@ class ProductService {
       .get(`/product/all`)
       .then((promise) => promise.data)
       .catch((error) => {
+        console.log(error)
         throw new Error(error);
       });
   findById = async (id: string) =>
