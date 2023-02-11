@@ -54,4 +54,7 @@
   .layout {
     @apply w-screen h-screen flex-1 flex justify-center  bg-gradient-to-br from-rose-100 to-teal-100;
   }
+  .space-x-6{
+   background-color: red;
+  }
 }/*# sourceMappingURL=globals.css.map */
