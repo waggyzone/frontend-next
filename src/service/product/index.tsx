@@ -31,6 +31,13 @@ class ProductService {
       .catch((error) => {
         throw new Error(error);
       });
+  remove = async (id: string | undefined) =>
+    await apiClient
+      .delete(`/product/remove/${id}`)
+      .then((promise) => promise.data)
+      .catch((error) => {
+        throw new Error(error);
+      });
 }
 
 const productService = new ProductService();

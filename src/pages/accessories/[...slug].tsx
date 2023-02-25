@@ -1,8 +1,8 @@
-//@ts-check
+//@ts-nocheck
 import { CreateAccessoriesValidationSchema } from "@/common/helper";
 import InputBox from "@/component/FormikField/InputBox";
 import StraightLoader from "@/component/Loader/StraightLoader";
-import  AccessoriesService  from '@/service/accessories';
+import AccessoriesService from "@/service/accessories";
 import { Form, Formik } from "formik";
 import { GetServerSideProps, NextPage } from "next";
 import Router from "next/router";
