@@ -7,6 +7,8 @@ declare module "next-auth" {
   interface Session {
     user: {
       access_token?: string | null;
+      refresh_token?: string | null;
+      role?: string | null;
     } & DefaultSession["user"];
   }
 }

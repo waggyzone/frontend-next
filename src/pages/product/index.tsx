@@ -10,6 +10,7 @@ import { product } from "../types/types";
 
 const Product: NextPage<{ data: [product] }> = ({ data }) => {
   const { status } = useSession();
+  
   const onEditProduct = (key: string | undefined) => {
     Router.push(`/product/edit/${key}`);
   };
@@ -33,7 +34,8 @@ const Product: NextPage<{ data: [product] }> = ({ data }) => {
       <div className="container mx-auto">
         <div className="flex justify-between items-center pb-2">
           <span>Product</span>
-          {status === "authenticated" ? (
+          {
+            status === "authenticated" ? (
             <Link href="/product/add" className="bg-blue-400 hover:bg-emerald-400 p-2 rounded-md">
               Create
             </Link>

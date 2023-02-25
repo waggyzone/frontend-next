@@ -14,6 +14,7 @@ class AccessoriesService {
       .get(`/accessories/all`)
       .then((promise) => promise.data)
       .catch((error) => {
+        console.log(error);
         throw new Error(error);
       });
   findById = async (id: string) =>
@@ -26,6 +27,13 @@ class AccessoriesService {
   update = async (id: string, params: accessories) =>
     await apiClient
       .put(`/accessories/update/${id}`, params)
+      .then((promise) => promise.data)
+      .catch((error) => {
+        throw new Error(error);
+      });
+  remove = async (id: string | undefined) =>
+    await apiClient
+      .delete(`/accessories/remove/${id}`)
       .then((promise) => promise.data)
       .catch((error) => {
         throw new Error(error);
