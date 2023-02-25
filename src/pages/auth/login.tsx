@@ -78,8 +78,7 @@ const Login: NextPage = () => {
         innerRef={loginFormikRef}
         initialValues={initialValue}
         validationSchema={LoginFormValidationSchema}
-        onSubmit={onLoginFormSubmit}
-      >
+        onSubmit={onLoginFormSubmit}>
         <Form className="z-10">
           <div className="login__container">
             <div className="login__container__header flex flex-col relative ">
@@ -112,8 +111,7 @@ const Login: NextPage = () => {
             <div className="login__container__button">
               <button
                 type="submit"
-                className="bg-[#FF3E4D] p-2 h-14 rounded-[0.75rem] text-black hover:bg-emerald-500 hover:text-green-900 flex justify-center items-center"
-              >
+                className="bg-[#FF3E4D] p-2 h-14 rounded-[0.75rem] text-black hover:bg-emerald-500 hover:text-green-900 flex justify-center items-center">
                 {loader ? <StraightLoader className="h-6 w-20" /> : <span>Login</span>}
               </button>
             </div>
@@ -122,8 +120,7 @@ const Login: NextPage = () => {
                 {"Don't have an account yet? "}
                 <div
                   className="text-blue-600 cursor-pointer gap-1"
-                  onClick={(event) => onClickToGoRegister(event)}
-                >
+                  onClick={(event) => onClickToGoRegister(event)}>
                   Create Account
                 </div>
               </div>

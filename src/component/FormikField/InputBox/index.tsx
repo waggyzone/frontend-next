@@ -15,8 +15,7 @@ const InputBox: React.FC = (props: any): JSX.Element => {
       <label
         className={`formik__label ${props.labelClassName}`}
         htmlFor={props.name}
-        id={`input-${props.name}`}
-      >
+        id={`input-${props.name}`}>
         {props?.label}
       </label>
       <input

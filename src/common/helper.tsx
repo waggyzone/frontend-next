@@ -30,6 +30,4 @@ export const CreateAccessoriesValidationSchema = Yup.object().shape({
   size: Yup.string().required("Required"),
   price: Yup.number().required("Required").min(10, "Minimum price  10"),
   color: Yup.string().required("Required"),
-  
 });
-

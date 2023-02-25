@@ -6,7 +6,6 @@ import Link from "next/link";
 import Router from "next/router";
 import { product } from "../types/types";
 
-
 const Product: NextPage<{ data: [product] }> = ({ data }) => {
   console.log(data);
   const onEditProduct = (key: string | undefined) => {
@@ -36,12 +35,11 @@ const Product: NextPage<{ data: [product] }> = ({ data }) => {
   );
 };
 
-
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const result = await ProductService.findAll().then((promise) => promise);
   return {
     props: {
-      data: result 
+      data: result,
     },
   };
 };

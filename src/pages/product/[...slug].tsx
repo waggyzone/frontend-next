@@ -26,7 +26,7 @@ const Product: NextPage<{ slug?: string[]; data?: product }> = ({ slug = "add", 
       .then((promise) => {
         if (promise) {
           toast.success("New product Added");
-          Router.replace(`/product`)
+          Router.replace(`/product`);
         } else {
           toast.loading("Something went wrong");
         }
@@ -41,7 +41,7 @@ const Product: NextPage<{ slug?: string[]; data?: product }> = ({ slug = "add", 
       .then((promise) => {
         if (promise) {
           toast.success("Product Updated");
-           Router.replace(`/product`)
+          Router.replace(`/product`);
         } else {
           toast.loading("Something went wrong");
         }
@@ -78,8 +78,7 @@ const Product: NextPage<{ slug?: string[]; data?: product }> = ({ slug = "add", 
           innerRef={addProductFormikRef}
           initialValues={initialValue}
           validationSchema={CreateProductValidationSchema}
-          onSubmit={onCreateProductFormSubmit}
-        >
+          onSubmit={onCreateProductFormSubmit}>
           <Form>
             <span className="text-3xl animate-pulse capitalize"> {slug[0].toString()} Product</span>
             <InputBox
@@ -119,8 +118,7 @@ const Product: NextPage<{ slug?: string[]; data?: product }> = ({ slug = "add", 
             <div className="login__container__button">
               <button
                 type="submit"
-                className="bg-[#FF3E4D] p-2 h-14 rounded-[0.75rem] text-black hover:bg-emerald-500 hover:text-green-900 flex justify-center items-center"
-              >
+                className="bg-[#FF3E4D] p-2 h-14 rounded-[0.75rem] text-black hover:bg-emerald-500 hover:text-green-900 flex justify-center items-center">
                 {loader ? <StraightLoader className="h-6 w-20" /> : <span>Create</span>}
               </button>
             </div>

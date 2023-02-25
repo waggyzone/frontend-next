@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+
+
 @layer components {
   .login {
     @apply w-screen h-screen bg-gradient-to-r from-cyan-500
@@ -55,7 +57,7 @@
   .layout {
     @apply w-screen h-screen flex-1 flex justify-center  bg-gradient-to-br from-rose-100 to-teal-100;
   }
-  .custom-radius{
+  .custom-radius {
     border-radius: 0% 0% 49% 50% / 0% 0% 14% 14%;
   }
   // Start

@@ -1,5 +1,5 @@
 import { Inter } from "@next/font/google";
-import { getSession, useSession } from "next-auth/react";
+import { getSession } from "next-auth/react";
 import Head from "next/head";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -10,7 +10,7 @@ export default function Home() {
     console.log(session);
   })();
 
-  const inner_html = () => <img src={`/Images/banner.png`}/>
+  const inner_html = () => <img src={`/Images/banner.png`} />;
   return (
     <>
       <Head>
@@ -19,50 +19,33 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className=" w-screen h-screen pt-15 flex-1  flex  flex-row overflow-auto bg-no-repeat">
-        <section id="home">
-            <div className="w-screen flex justifiy-between items-center bg-no-repeat "
+      <div className=" w-screen h-screen  flex-1 flex  flex-col overflow-auto bg-no-repeat  snap-y snap-mandatory">
+        <section
+          id="home"
+          className="snap-start justifiy-between items-center bg-no-repeat "
           style={{
-         backgroundImage:`url(/Images/banner.png)`,
-       }}
-        >
-          <div className="text-white text-7xl w-screen">
-            <i>Where being the pet is just best!</i>
+            backgroundImage: `url(/Images/banner.png)`,
+          }}>
+          <div className="container mx-auto flex flex-row justify-between items-center">
+            <div className="text-white text-7xl w-screen">
+              <i>Where being the pet is just best!</i>
             </div>
-          <div className="w-[12px]"></div>
-          <div className="  h-fit w-fit bottom-1 mt-[11rem]  ">
-            <img src={`/Images/Dog.png`} className="w-[800rem] h-[50rem] "/>
+            <div className="w-[12px]"></div>
+            <div className=" z-10 h-fit w-fit bottom-1 mt-[11rem]">
+              <img src={`/Images/Dog.png`} className="w-[800rem] h-[50rem] " />
+            </div>
           </div>
-          
-        </div>
-        <div className="text-black-500 text-6xl grid h-screen place-items-center pb-60 m-4">
-          <h1>Services for pets</h1>
-          <div className="flex flex-col place-items-center bg-white h-80 w-80 p-4 m-4  rounded-lg"> 
-          <div className="text-3xl text-black-500">
-          <h1>Training</h1>
-          </div>
-          </div>
-          <div className="flex flex-col place-items-center bg-white h-80 w-80 p-4 m-4 rounded-lg"> 
-          <div className="text-3xl text-black-500">
-          <h1>Grooming</h1>
-          </div></div>
-          <div className="flex flex-col place-items-center bg-white h-80 w-80 p-4  pb-10 rounded-lg"> 
-          <div className="text-3xl text-black-500">
-          <h1>Daycare</h1>
-          </div></div>
-          
-        </div>
-        <div className="  h-fit w-fit bottom-1 mt-[20rem]  ">
-            <img src={`/Images/pet_care.png`} className="w-[30rem] h-[30rem]  "/>
-          </div>
-       
-          
-        
-        
-        
-      </section>
+        </section>
+        <section className="snap-start">
+          <div className="bg-yellow-500 w-screen h-screen">1</div>
+        </section>
+        <section className="snap-start">
+          <div className="bg-green-500 w-screen h-screen">2</div>
+        </section>
+        <section className="snap-start">
+          <div className="bg-blue-500 w-screen h-screen">3</div>
+        </section>
       </div>
-     
     </>
   );
 }

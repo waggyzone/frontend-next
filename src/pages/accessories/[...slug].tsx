@@ -14,7 +14,7 @@ const initialValue = {
   name: "",
   size: "",
   price: 0,
-  color:"",
+  color: "",
 };
 
 const Accessories: NextPage<{ slug?: string[]; data?: accessories }> = ({ slug = "add", data }) => {
@@ -26,7 +26,7 @@ const Accessories: NextPage<{ slug?: string[]; data?: accessories }> = ({ slug =
       .then((promise) => {
         if (promise) {
           toast.success("New Accessorie Added");
-          Router.replace(`/accessories`)
+          Router.replace(`/accessories`);
         } else {
           toast.loading("Something went wrong");
         }
@@ -41,7 +41,7 @@ const Accessories: NextPage<{ slug?: string[]; data?: accessories }> = ({ slug =
       .then((promise) => {
         if (promise) {
           toast.success("Accessorie Updated");
-           Router.replace(`/accessorie`)
+          Router.replace(`/accessorie`);
         } else {
           toast.loading("Something went wrong");
         }
@@ -78,10 +78,12 @@ const Accessories: NextPage<{ slug?: string[]; data?: accessories }> = ({ slug =
           innerRef={addAccessoriesFormikRef}
           initialValues={initialValue}
           validationSchema={CreateAccessoriesValidationSchema}
-          onSubmit={onCreateAccessoriesFormSubmit}
-        >
+          onSubmit={onCreateAccessoriesFormSubmit}>
           <Form>
-            <span className="text-3xl animate-pulse capitalize"> {slug[0].toString()} Accessories</span>
+            <span className="text-3xl animate-pulse capitalize">
+              {" "}
+              {slug[0].toString()} Accessories
+            </span>
             <InputBox
               inputClassName="login__container__input"
               labelClassName="login__container__label"
@@ -130,8 +132,7 @@ const Accessories: NextPage<{ slug?: string[]; data?: accessories }> = ({ slug =
             <div className="login__container__button">
               <button
                 type="submit"
-                className="bg-[#FF3E4D] p-2 h-14 rounded-[0.75rem] text-black hover:bg-emerald-500 hover:text-green-900 flex justify-center items-center"
-              >
+                className="bg-[#FF3E4D] p-2 h-14 rounded-[0.75rem] text-black hover:bg-emerald-500 hover:text-green-900 flex justify-center items-center">
                 {loader ? <StraightLoader className="h-6 w-20" /> : <span>Create</span>}
               </button>
             </div>

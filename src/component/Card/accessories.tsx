@@ -8,7 +8,7 @@ const Card: React.FC<{
   color?: string;
   onEdit?: MouseEventHandler<HTMLButtonElement>;
   onDelete?: MouseEventHandler<HTMLButtonElement>;
-}> = ({ key, title, size, price,color, onEdit, onDelete }) => {
+}> = ({ key, title, size, price, color, onEdit, onDelete }) => {
   return (
     <div className="rounded-md overflow-hidden shadow-lg bg-white" key={key}>
       <div className="px-6 py-4 flex flex-1 ">
@@ -30,16 +30,15 @@ const Card: React.FC<{
           {price}
         </span>
         <div className="px-6 pt-4 pb-2">
-        <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-          {color}
-        </span>
-       <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-          {size}
-        </span>
+          <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
+            {color}
+          </span>
+          <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
+            {size}
+          </span>
+        </div>
       </div>
     </div>
-    </div>
-
   );
 };
 export default Card;

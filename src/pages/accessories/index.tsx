@@ -6,7 +6,6 @@ import Link from "next/link";
 import Router from "next/router";
 import { accessories } from "../types/types";
 
-
 const Accessories: NextPage<{ data: [accessories] }> = ({ data }) => {
   console.log(data);
   const onEditAccessories = (key: string | undefined) => {
@@ -18,7 +17,7 @@ const Accessories: NextPage<{ data: [accessories] }> = ({ data }) => {
       <Head>
         <title>Accessories</title>
       </Head>
-      this is Accessories 
+      this is Accessories
       <Link href="/accessories/add">Add Accessories</Link>
       <div className=" container mx-auto grid grid-cols-2 gap-4">
         {Array.from(data).map((data) => (
@@ -37,12 +36,11 @@ const Accessories: NextPage<{ data: [accessories] }> = ({ data }) => {
   );
 };
 
-
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const result = await AccessoriesService.findAll().then((promise) => promise);
   return {
     props: {
-      data: result 
+      data: result,
     },
   };
 };
