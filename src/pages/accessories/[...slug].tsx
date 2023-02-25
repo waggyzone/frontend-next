@@ -1,14 +1,14 @@
-//@ts-nocheck
+//@ts-check
 import { CreateAccessoriesValidationSchema } from "@/common/helper";
 import InputBox from "@/component/FormikField/InputBox";
 import StraightLoader from "@/component/Loader/StraightLoader";
+import  AccessoriesService  from '@/service/accessories';
 import { Form, Formik } from "formik";
-import { NextPage } from "next";
+import { GetServerSideProps, NextPage } from "next";
+import Router from "next/router";
 import { useRef, useState } from "react";
 import { toast } from "react-hot-toast";
-import { GetServerSideProps } from "next";
 import { accessories } from "../types/types";
-import Router from "next/router";
 
 const initialValue = {
   name: "",
