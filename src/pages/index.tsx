@@ -19,27 +19,50 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className=" w-screen h-screen pt-16 flex-1  flex  flex-row overflow-auto bg-no-repeat">
+      <div className=" w-screen h-screen pt-15 flex-1  flex  flex-row overflow-auto bg-no-repeat">
         <section id="home">
             <div className="w-screen flex justifiy-between items-center bg-no-repeat "
           style={{
          backgroundImage:`url(/Images/banner.png)`,
        }}
         >
-          <div className="w-[300px]">
-
-            <p>Theertha</p>
+          <div className="text-white text-7xl w-screen">
+            <i>Where being the pet is just best!</i>
+            </div>
+          <div className="w-[12px]"></div>
+          <div className="  h-fit w-fit bottom-1 mt-[11rem]  ">
+            <img src={`/Images/Dog.png`} className="w-[800rem] h-[50rem] "/>
           </div>
-          <div className="  h-fit w-fit bottom-1 mt-[20rem]  ">
-            <img src={`/Images/Dog.png`} className="w-[65rem] h-[50rem] "/>
-          </div>
+          
         </div>
-      </section>
-        <section id="#1">
-          <h1>service for every dog</h1>
-       </section>
+        <div className="text-black-500 text-6xl grid h-screen place-items-center pb-60 m-4">
+          <h1>Services for pets</h1>
+          <div className="flex flex-col place-items-center bg-white h-80 w-80 p-4 m-4  rounded-lg"> 
+          <div className="text-3xl text-black-500">
+          <h1>Training</h1>
+          </div>
+          </div>
+          <div className="flex flex-col place-items-center bg-white h-80 w-80 p-4 m-4 rounded-lg"> 
+          <div className="text-3xl text-black-500">
+          <h1>Grooming</h1>
+          </div></div>
+          <div className="flex flex-col place-items-center bg-white h-80 w-80 p-4  pb-10 rounded-lg"> 
+          <div className="text-3xl text-black-500">
+          <h1>Daycare</h1>
+          </div></div>
+          
+        </div>
+        <div className="  h-fit w-fit bottom-1 mt-[20rem]  ">
+            <img src={`/Images/pet_care.png`} className="w-[30rem] h-[30rem]  "/>
+          </div>
        
+          
+        
+        
+        
+      </section>
       </div>
+     
     </>
   );
 }
