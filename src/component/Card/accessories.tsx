@@ -10,7 +10,7 @@ const Card: React.FC<{
   color?: string;
   onEdit?: MouseEventHandler<HTMLButtonElement>;
   onDelete?: MouseEventHandler<HTMLButtonElement>;
-}> = ({ key, title,size, price,color, onEdit, onDelete }) => {
+}> = ({ key, title, size, price, color, onEdit, onDelete }) => {
   const { status } = useSession();
   return (
     <div className="rounded-md overflow-hidden shadow-lg bg-white" key={key}>

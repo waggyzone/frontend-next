@@ -1,4 +1,3 @@
-import Button from "@/component/Button";
 import Card from "@/component/Card/product";
 import ProductService from "@/service/product";
 import { GetServerSideProps, NextPage } from "next";
@@ -27,6 +26,10 @@ const Product: NextPage<{ data: [product] }> = ({ data }) => {
       refreshData();
     }
   };
+  const onAddProduct = (val1: any, val: any) => {
+    console.log("vannu", { val1, val });
+  };
+
   return (
     <div className="pt-32 w-screen">
       <Head>
@@ -44,21 +47,17 @@ const Product: NextPage<{ data: [product] }> = ({ data }) => {
         <div className=" grid grid-cols-2 gap-4">
           {Array.from(data).map((data) => (
             <Card
-              key={data._id}
+              id={data._id}
               title={data.name}
-              brandname={data.name}
+              brandname={data.brandname}
               price={data.price}
               onEdit={() => onEditProduct(data._id)}
-              onDelete={() => onDeleteProduct(data._id)}>
+              onDelete={() => onDeleteProduct(data._id)}
+              onAdd={onAddProduct}>
               <div>
-                <Button
-                  enableIcon
-                  type="cart"
-                  className="bg-slate-300 rounded-md shadow-md hover:scale-105"
-                />
-                <div>
+                {/* <div>
                   <input type="number" step="1" min={1} className="bg-orange-500" />
-                </div>
+                </div> */}
               </div>
             </Card>
           ))}
@@ -69,7 +68,7 @@ const Product: NextPage<{ data: [product] }> = ({ data }) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const result = await ProductService.findAll().then((promise) => promise);
+  const result: product = await ProductService.findAll().then((promise) => promise);
   return {
     props: {
       data: result,

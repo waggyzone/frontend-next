@@ -18,7 +18,7 @@ const Accessories: NextPage<{ data: [accessories] }> = ({ data }) => {
     Router.replace(Router.asPath);
   };
 
-  const onDeleteAccessories= async (key: string | undefined) => {
+  const onDeleteAccessories = async (key: string | undefined) => {
     const result = await AccessoriesService.remove(key);
     if (result) {
       toast.success(result.name);
@@ -34,7 +34,9 @@ const Accessories: NextPage<{ data: [accessories] }> = ({ data }) => {
         <div className="flex justify-between items-center pb-2">
           <span>Accessories</span>
           {status === "authenticated" ? (
-            <Link href="/accessories/add" className="bg-blue-400 hover:bg-emerald-400 p-2 rounded-md">
+            <Link
+              href="/accessories/add"
+              className="bg-blue-400 hover:bg-emerald-400 p-2 rounded-md">
               Create
             </Link>
           ) : null}
