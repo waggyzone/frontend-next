@@ -21,3 +21,10 @@ export type accessories = {
   price: number;
   color: string;
 };
+export type cart = {
+  _id?: string;
+  product_id: string;
+  accessories_id: string;
+  count: number;
+  status: string;
+}
