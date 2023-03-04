@@ -1,3 +1,4 @@
+import Button from "@/component/Button";
 import Card from "@/component/Card/product";
 import ProductService from "@/service/product";
 import { GetServerSideProps, NextPage } from "next";
@@ -10,7 +11,7 @@ import { product } from "../types/types";
 
 const Product: NextPage<{ data: [product] }> = ({ data }) => {
   const { status } = useSession();
-  
+
   const onEditProduct = (key: string | undefined) => {
     Router.push(`/product/edit/${key}`);
   };
@@ -34,8 +35,7 @@ const Product: NextPage<{ data: [product] }> = ({ data }) => {
       <div className="container mx-auto">
         <div className="flex justify-between items-center pb-2">
           <span>Product</span>
-          {
-            status === "authenticated" ? (
+          {status === "authenticated" ? (
             <Link href="/product/add" className="bg-blue-400 hover:bg-emerald-400 p-2 rounded-md">
               Create
             </Link>
@@ -49,8 +49,18 @@ const Product: NextPage<{ data: [product] }> = ({ data }) => {
               brandname={data.name}
               price={data.price}
               onEdit={() => onEditProduct(data._id)}
-              onDelete={() => onDeleteProduct(data._id)}
-            />
+              onDelete={() => onDeleteProduct(data._id)}>
+              <div>
+                <Button
+                  enableIcon
+                  type="cart"
+                  className="bg-slate-300 rounded-md shadow-md hover:scale-105"
+                />
+                <div>
+                  <input type="number" step="1" min={1} className="bg-orange-500" />
+                </div>
+              </div>
+            </Card>
           ))}
         </div>
       </div>
