@@ -36,15 +36,119 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+
+
         <section className="snap-start">
-          <div className="bg-yellow-500 w-screen h-screen">1</div>
+          <div className="bg-white-500 w-screen h-screen">
+            <div className="text-red-500 text-6xl w-screen font-serif-Times New Roman text-left px-20 py-20">
+              <h1><b> Services </b>For <br/>Your <b>Pets</b></h1>
+             <div className="text-gray-500 text-3xl  font-sans-ui-sans-serif text-left px-10 py-10">
+              <h4> <i>We care the way you care</i></h4>
+              <div className="flex justify-between px-20 py-20  ">
+                <img src="Images/grooming.jpg" className="w-[20rem] h-[15rem] rounded-full shadow-2xl " />
+                <div className="m-4">
+                  <span className="font-bond text-black text-2xl flex justify-between ">GROOMING</span>
+                  </div>
+                <img src="Images/daycare.jpeg" className="w-[20rem] h-[15rem] rounded-full shadow-2xl  " />
+                <div className="m-4">
+                  <span className="font-bond text-black text-2xl flex justify-between">DAYCARE</span>
+                  </div>
+                <img src="Images/training.webp" className="w-[20rem] h-[15rem] rounded-full shadow-2xl " />
+                <div className="m-4">
+                  <span className="font-bond text-black text-xl flex justify-between">TRAINING</span>
+                  </div>
+                </div>
+                
+                
+              </div>
+            </div>
+            </div>
         </section>
+
+
+<section className="snap-start">
+          <div className="bg-white-500 w-screen h-screen">
+            <div className="w-[30rem] h-[15rem] px-10 py-20">
+              <img src="Images/cat dog.jpg"/></div>
+            
+            <div className="text-black-500 text-7xl w-screen font-serif-Times New Roman text-center">
+              <h1><br /><b>About us</b></h1>
+              <div className="text-gray-500 text-3xl w-screen font-serif text-center ">
+             <h4> <i>WAGGYis a unique marketplace <br/>where you can find one of a kind products <br/>to pamper your furry, finned, or feathered pet friend.</i></h4>
+              </div>
+              </div>
+              </div> 
+        </section>
+        
+
+
+
+
+
+
+
+
+
         <section className="snap-start">
-          <div className="bg-green-500 w-screen h-screen">2</div>
+          <div className="bg-white-500 w-screen h-screen">
+            <div className="text-black-500 text-5xl w-screen font-serif text-left px-10 py-20">
+              <h1><br /><b>Contact Us</b></h1></div>
+             
+            <form className="w-full max-w-sm px-10 py-0 ">
+  <div className="md:flex md:items-center mb-6">
+    <div className="md:w-1/3">
+      <label className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4" htmlFor="inline-full-name">
+        <h4>Full Name</h4>
+      </label>
+    </div>
+    <div className="md:w-2/3">
+      <input className="bg-gray-300 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" id="inline-full-name" type="text"/>
+    </div>
+  </div>
+  <div className="md:flex md:items-center mb-6">
+    <div className="md:w-1/3">
+      <label className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4" htmlFor="inline-password">
+        <h4>Email</h4>
+      </label>
+    </div>
+    <div className="md:w-2/3">
+      <input className="bg-gray-300 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" id="inline-password" type="password"/>
+    </div>
+              </div>
+         <div className="md:flex md:items-center mb-6">
+    <div className="md:w-1/3">
+      <label className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4" htmlFor="inline-full-name">
+        <h4>Message</h4>
+      </label>
+    </div>
+    <div className="md:w-2/3">
+      <input className="bg-gray-300 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" id="inline-full-name" type="text"/>
+    </div>
+  </div>     
+
+  
+    
+  <div className="md:flex md:items-center">
+    <div className="md:w-1/3"></div>
+    <div className="md:w-2/3">
+      <button className="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" type="button">
+        Send Message
+      </button>
+    </div>
+  </div>
+</form>
+<img src="Images/contact.jpg" className="w-[20rem] h-[15rem] r shadow-2xl   " />
+          </div>
+        
         </section>
-        <section className="snap-start">
-          <div className="bg-blue-500 w-screen h-screen">3</div>
-        </section>
+        
+
+        
+       
+
+          
+        
       </div>
     </>
   );
