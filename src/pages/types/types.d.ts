@@ -21,3 +21,9 @@ export type accessories = {
   price: number;
   color: string;
 };
+exporttype cart={
+   _id?: string;
+   status:string;
+   count:number;
+
+}
