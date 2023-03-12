@@ -2,9 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
-
-
 @layer components {
   .login {
     @apply w-screen h-screen bg-gradient-to-r from-cyan-500

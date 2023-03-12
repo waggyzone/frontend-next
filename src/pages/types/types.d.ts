@@ -1,4 +1,3 @@
-import { type } from "os";
 
 export type createUser = {
   firstName: string;
@@ -9,18 +8,19 @@ export type createUser = {
 };
 
 export type product = {
-  _id?: string;
+  _id: string;
   name: string;
   brandname: string;
   price: number;
 };
 export type accessories = {
-  _id?: string;
+  _id: string;
   name: string;
   size: string;
   price: number;
   color: string;
 };
+
 export type cart = {
   _id?: string;
   product_id: string;
@@ -28,3 +28,6 @@ export type cart = {
   count: number;
   status: string;
 }
+
+
+

@@ -2,6 +2,7 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import Router from "next/router";
 import React from "react";
+import Shop from "../Icon/Shop.Icon";
 
 const Header: React.FC = () => {
   const { status } = useSession();
@@ -35,7 +36,7 @@ const Header: React.FC = () => {
   return (
     <header className="flex flex-row justify-between w-screen px-[4.6875rem] h-16 items-center fixed z-30 top-0 bg-slate-50">
       <div>logo</div>
-      <nav className="space-x-6">
+      <nav className="space-x-6 flex flex-row">
         <Link href="/">Home</Link>
         <Link href="/product">Product</Link>
         <Link href="/accessories">Accessories</Link>
@@ -50,6 +51,7 @@ const Header: React.FC = () => {
         {status === "unauthenticated" ? (
           <button onClick={(event) => onRegisterClick(event)}>Register</button>
         ) : null}
+        <Shop />
       </nav>
     </header>
   );

@@ -1,6 +1,7 @@
 //@ts-nocheck
 import Layout from "@/component/Layout";
 import DogLoader from "@/component/Loader/DogLoader";
+import StateProvider from "@/context/waggyContext";
 import "@/styles/globals.scss";
 import { Prompt } from "@next/font/google";
 import type { Session } from "next-auth";
@@ -16,17 +17,19 @@ export default function App({
   pageProps: { session, ...pageProps },
 }: AppProps<{ session: Session }>) {
   return (
-    <SessionProvider session={session}>
-      <Layout className={prompt.className}>
-        <Toaster position="top-right" reverseOrder={false} gutter={8} containerClassName="" />
-        {Component.auth ? (
-          <Auth>
+    <SessionProvider session={session} refetchInterval>
+      <StateProvider>
+        <Layout className={prompt.className}>
+          <Toaster position="top-right" reverseOrder={false} gutter={8} containerClassName="" />
+          {Component.auth ? (
+            <Auth>
+              <Component {...pageProps} />
+            </Auth>
+          ) : (
             <Component {...pageProps} />
-          </Auth>
-        ) : (
-          <Component {...pageProps} />
-        )}
-      </Layout>
+          )}
+        </Layout>
+      </StateProvider>
     </SessionProvider>
   );
 }

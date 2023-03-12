@@ -1,5 +1,5 @@
 import { useSession } from "next-auth/react";
-import React, { MouseEventHandler } from "react";
+import React, { MouseEventHandler, useState } from "react";
 import Button from "../Button";
 
 const Card: React.FC<{
@@ -10,8 +10,15 @@ const Card: React.FC<{
   color?: string;
   onEdit?: MouseEventHandler<HTMLButtonElement>;
   onDelete?: MouseEventHandler<HTMLButtonElement>;
-}> = ({ key, title,size, price,color, onEdit, onDelete }) => {
-  const { status } = useSession();
+}> = ({ key, title, size, price, color, onEdit, onDelete }) => {
+  const [quantity, setQuantity] = useState(1);
+  const { data: session, status } = useSession();
+  
+
+  function onAdd(key: string | number | undefined, quantity: number) {
+    throw new Error("Function not implemented.");
+  }
+
   return (
     <div className="rounded-md overflow-hidden shadow-lg bg-white" key={key}>
       <div className="px-6 py-4 flex flex-1 ">
@@ -35,7 +42,39 @@ const Card: React.FC<{
               className="bg-slate-300 rounded-md shadow-md hover:scale-105"
             />
           </div>
-        ) : null}
+        ) : (
+          <div>
+            <Button
+              onClick={(event) => {
+                event.preventDefault();
+                onAdd(key, quantity);
+              }}
+              enableIcon
+              type="cart"
+              className="bg-slate-300 rounded-md shadow-md hover:scale-105"
+            />
+            <div className=" flex flex-row">
+              <button
+                className="bg-slate-500 rounded-full h-5 w-5 flex items-center justify-center"
+                onClick={() => setQuantity((prev) => prev + 1)}>
+                +
+              </button>
+              <span>{quantity}</span>
+              <button
+                className="bg-slate-500 rounded-full h-5 w-5 flex items-center justify-center"
+                onClick={() =>
+                  setQuantity((prev) => {
+                    if (prev > 1) {
+                      return prev - 1;
+                    }
+                    return prev;
+                  })
+                }>
+                -
+              </button>
+            </div>
+          </div>
+        ) }
       </div>
       <div className="px-6 pt-4 pb-2">
         <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
