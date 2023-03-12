@@ -17,7 +17,7 @@ export default function App({
   pageProps: { session, ...pageProps },
 }: AppProps<{ session: Session }>) {
   return (
-    <SessionProvider session={session} refetchInterval>
+    <SessionProvider session={session}>
       <StateProvider>
         <Layout className={prompt.className}>
           <Toaster position="top-right" reverseOrder={false} gutter={8} containerClassName="" />

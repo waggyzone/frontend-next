@@ -27,12 +27,10 @@ const Product: NextPage<{ data: [product] }> = ({ data }) => {
       refreshData();
     }
   };
-  const onAddProduct = async(_id: string, quantity: number) => {
-    console.log("vannu", { _id, quantity });
-
-const data = JSON.stringify({
-      count: quantity,
-      product_id: _id,
+  const onAddProduct = async (id: string, qty: number) => {
+    const data = JSON.stringify({
+      count: qty,
+      product_id: id,
     });
     const result = await cartService.addProductToCart(data);
     console.log("result", result);
@@ -54,6 +52,7 @@ const data = JSON.stringify({
         </div>
         <div className=" grid grid-cols-2 gap-4">
           {Array.from(data).map((data) => (
+            //@ts-ignore
             <Card
               id={data._id}
               title={data.name}

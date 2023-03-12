@@ -42,7 +42,7 @@ export const authOptions: NextAuthOptions = {
       //@ts-ignore
       session.user.access_token = token.access_token;
       //@ts-ignore
-      session.user.refresh_token = token.access_token;
+      session.user.refresh_token = token.refresh_token;
       //@ts-ignore
       session.user.role = token.role;
       return session;

@@ -26,34 +26,41 @@ apiClient.interceptors.response.use(
   },
   async (err) => {
     const session = await getSession();
-    const originalConfig = err.config;
-    console.log(err.config);
-    if (originalConfig.url !== "/auth/login/*" && err.response) {
-      // Access Token was expired
-      if (err.response.status === 401 && !originalConfig._retry) {
-        originalConfig._retry = true;
+    if (session !== null) {
+      const originalConfig = err.config;
+      console.log(err.config);
+      if (originalConfig.url !== "/auth/login/*" && err.response) {
+        // Access Token was expired
+        if (err.response.status === 401 || !originalConfig._retry) {
+          originalConfig._retry = true;
+          try {
+            // const rs = await Axios.post("/auth/refresh", {
+            //   headers: {
+            //     Authorization: `Bearer ${session?.user.refresh_token}`,
+            //   },
+            // });
+            console.log(session?.user.refresh_token);
+            const rs = await Axios.get(`${process.env.NEXT_PUBLIC_API_URL}/auth/refresh`, {
+              headers: {
+                Authorization: `Bearer ${session?.user.refresh_token}`,
+              },
+            });
 
-        try {
-          const rs = await Axios.post("/auth/refresh", {
-            headers: {
-              Authorization: `Bearer ${session.user.refresh_token}`,
-            },
-          });
-    
-          //@ts-ignore
-          session.user.access_token = rs.data.access_token;
-          //@ts-ignore
-          session.user.refresh_token = rs.data.access_token;
-          //@ts-ignore
-          session.user.role = rs.data.role;
+            //@ts-ignore
+            session.user.access_token = rs.data.access_token;
+            //@ts-ignore
+            session.user.refresh_token = rs.data.access_token;
+            //@ts-ignore
+            session.user.role = rs.data.role;
 
-          localStorage.setItem("refresh-token", rs.data.refresh_token);
+            localStorage.setItem("refresh-token", rs.data.refresh_token);
 
-          return apiClient(originalConfig);
-        } catch (_error) {
-          // Redirecting the user to the landing page
-          window.location.href = window.location.origin;
-          return Promise.reject(_error);
+            return apiClient(originalConfig);
+          } catch (_error) {
+            // Redirecting the user to the landing page
+            window.location.href = window.location.origin;
+            return Promise.reject(_error);
+          }
         }
       }
     }
