@@ -1,70 +1,63 @@
-import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
+import axios from "axios";
 import { getSession } from "next-auth/react";
 
-const onRequest = async (config: AxiosRequestConfig): Promise<AxiosRequestConfig> => {
+const baseURL = process.env.NEXT_PUBLIC_API_URL;
+
+const apiClient = axios.create({
+  baseURL,
+  timeout: 30000,
+});
+
+apiClient.interceptors.request.use(async (config) => {
   const session = await getSession();
   if (session) {
-    //@ts-ignore
-    config.headers["Authorization"] = `Bearer ${session.user.access_token}`;
+    config.headers.Authorization = `Bearer ${session.user.access_token}`;
   }
   return config;
-};
+});
 
-const onRequestError = (error: AxiosError): Promise<AxiosError> => {
-  return Promise.reject(error);
-};
+apiClient.interceptors.response.use(
+  (response) => response,
+  async (error) => {
+    const { response, config } = error;
 
-const onResponse = (response: AxiosResponse): AxiosResponse => {
-  return response;
-};
+    if (response.status !== 401) {
+      return Promise.reject(error);
+    }
 
-const onResponseError = async (error: AxiosError): Promise<AxiosError> => {
-  if (error.response) {
-    // Access Token was expired
-    if (error.response.status === 401) {
-      try {
-        const session = await getSession();
-        const rs = await axios.post(
-          `${process.env.NEXT_PUBLIC_API_URL}/auth/refresh`,
-          {
-            user: session?.user,
-          },
-          {
+    // Use a 'clean' instance of axios without the interceptor to refresh the token. No more infinite refresh loop.
+    // get("/auth/refresh", {
+    //     baseURL,
+    //     timeout: 30000,
+    //     headers: {},
+    //   })
+    if (response.status === 401) {
+      const session = await getSession();
+      if (session) {
+        return axios
+          .get(`${process.env.NEXT_PUBLIC_API_URL}/auth/refresh`, {
             headers: {
               Authorization: `Bearer ${session?.user.refresh_token}`,
             },
-          }
-        );
-        if (session) {
-          session.user.access_token = rs.data.access_token;
-          //@ts-ignore
-          session?.user.refresh_token = <rs className="data refresh_token"></rs>;
-          //@ts-ignore
-          session.user.role = rs.data.role;
-        }
-
-        return error;
-      } catch (_error) {
-        return Promise.reject(_error);
+          })
+          .then((promise) => {
+                        session.user.access_token = promise.data.access_token;
+                        //@ts-ignore
+                        session.user.refresh_token = promise.data.access_token;
+                        //@ts-ignore
+                        session.user.role = promise.data.role;
+                        session.user.name =promise.data.name;
+            config.headers.Authorization = `Bearer ${promise.data.user.access_token}`;
+            return apiClient(config);
+          })
+          .catch(() => {
+            return Promise.reject(error);
+          });
       }
     }
+
+    return Promise.resolve();
   }
-  return Promise.reject(error);
-};
-
-const setupInterceptorsTo = (axiosInstance: AxiosInstance): AxiosInstance => {
-  axiosInstance.interceptors.request.use(onRequest, onRequestError);
-  axiosInstance.interceptors.response.use(onResponse, onResponseError);
-  return axiosInstance;
-};
-
-const apiClient = setupInterceptorsTo(
-  axios.create({
-    baseURL: process.env.NEXT_PUBLIC_API_URL,
-    headers: {
-      "Content-Type": "application/json",
-    },
-  })
 );
 
 export { apiClient };

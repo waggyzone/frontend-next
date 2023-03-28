@@ -1,4 +1,3 @@
-
 export type createUser = {
   firstName: string;
   lastName: string;
@@ -27,7 +26,4 @@ export type cart = {
   accessories_id: string;
   count: number;
   status: string;
-}
-
-
-
+};

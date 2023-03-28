@@ -1,15 +1,9 @@
 import { Inter } from "@next/font/google";
-import { getSession } from "next-auth/react";
 import Head from "next/head";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
-  (async () => {
-    const session = await getSession();
-    console.log(session);
-  })();
-
   const inner_html = () => <img src={`/Images/banner.png`} />;
   return (
     <>

@@ -54,6 +54,7 @@ const Product: NextPage<{ data: [product] }> = ({ data }) => {
           {Array.from(data).map((data) => (
             //@ts-ignore
             <Card
+              key={data._id}
               id={data._id}
               title={data.name}
               brandname={data.brandname}

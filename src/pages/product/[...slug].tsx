@@ -140,7 +140,8 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
       slug: slug,
       data: result || {},
     },
-  };o
+  };
+  o;
 };
 
 export default Product;

@@ -1,7 +1,6 @@
 import { apiClient } from "@/common/apiClient";
-import CredentialsProvider from "next-auth/providers/credentials";
 import NextAuth, { NextAuthOptions } from "next-auth";
-import { url } from "inspector";
+import CredentialsProvider from "next-auth/providers/credentials";
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -21,7 +20,7 @@ export const authOptions: NextAuthOptions = {
           });
         if (result) {
           apiClient.defaults.headers.common["Authorization"] = `Bearer ${result.access_token}`;
-          return result;
+          return Promise.resolve(result);
         }
         return null;
       },
@@ -36,9 +35,14 @@ export const authOptions: NextAuthOptions = {
   },
   callbacks: {
     async jwt({ token, account, isNewUser, profile, user }) {
+
       return { ...token, ...user };
+
     },
     async session({ session, token, user }) {
+      console.log("user", {
+        token, user, session
+      })
       //@ts-ignore
       session.user.access_token = token.access_token;
       //@ts-ignore

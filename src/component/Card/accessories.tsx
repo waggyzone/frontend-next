@@ -13,7 +13,6 @@ const Card: React.FC<{
 }> = ({ key, title, size, price, color, onEdit, onDelete }) => {
   const [quantity, setQuantity] = useState(1);
   const { data: session, status } = useSession();
-  
 
   function onAdd(key: string | number | undefined, quantity: number) {
     throw new Error("Function not implemented.");
@@ -74,7 +73,7 @@ const Card: React.FC<{
               </button>
             </div>
           </div>
-        ) }
+        )}
       </div>
       <div className="px-6 pt-4 pb-2">
         <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">

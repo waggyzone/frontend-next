@@ -46,7 +46,7 @@ const Login: NextPage = () => {
       .then((promise) => {
         if (promise?.ok) {
           setLoader(false);
-          Router.push("/");
+          // Router.push("/");
         } else {
           toast.error("Invalid Credentials");
         }

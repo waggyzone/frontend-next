@@ -70,7 +70,7 @@ const Accessories: NextPage<{ slug?: string[]; data?: accessories }> = ({ slug =
     //@ts-ignore
     addAccessoriesFormikRef.current.setFieldValue(data.target.name, data.target.value);
   };
-  console.log("firest", data);
+
   return (
     <div className="register">
       <div className="register__container">

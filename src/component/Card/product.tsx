@@ -15,7 +15,7 @@ const Card: React.FC<{
   const { data: session, status } = useSession();
 
   return (
-    <div className="rounded-md overflow-hidden shadow-lg bg-white" key={id}>
+    <div className="rounded-md overflow-hidden shadow-lg bg-white" key={restProps.key}>
       <div className="px-6 py-4 flex flex-1 ">
         <div className="flex-[0.9]">
           <div className="font-bold text-xl mb-2">{title}</div>
