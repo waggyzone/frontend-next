@@ -35,14 +35,14 @@ export const authOptions: NextAuthOptions = {
   },
   callbacks: {
     async jwt({ token, account, isNewUser, profile, user }) {
-
       return { ...token, ...user };
-
     },
     async session({ session, token, user }) {
       console.log("user", {
-        token, user, session
-      })
+        token,
+        user,
+        session,
+      });
       //@ts-ignore
       session.user.access_token = token.access_token;
       //@ts-ignore

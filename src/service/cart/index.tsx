@@ -1,5 +1,6 @@
 import { apiClient } from "@/common/apiClient";
 import { cart } from "@/pages/types/types";
+import { promises } from "dns";
 class CartService {
   addProductToCart = async (data: any) => {
     apiClient
@@ -10,15 +11,20 @@ class CartService {
         throw new Error(error);
       });
   };
-
-  findById = async (id: string) =>
+  findAllCartItems = async () =>
     await apiClient
-      .get(`/product/find/${id}`)
-      .then((promise) => promise.data)
+      .get(`/cart/find`)
+      .then((promise) => {
+        if (promise !== undefined) {
+          
+          return promise.data
+        }
+      })
       .catch((error) => {
-        console.log(error);
+        console.log("cart",error)
         throw new Error(error);
       });
+
   update = async (id: string, params: cart) =>
     await apiClient
       .put(`/cart/update/${id}`, params)

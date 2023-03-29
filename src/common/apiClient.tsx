@@ -41,12 +41,12 @@ apiClient.interceptors.response.use(
             },
           })
           .then((promise) => {
-                        session.user.access_token = promise.data.access_token;
-                        //@ts-ignore
-                        session.user.refresh_token = promise.data.access_token;
-                        //@ts-ignore
-                        session.user.role = promise.data.role;
-                        session.user.name =promise.data.name;
+            session.user.access_token = promise.data.access_token;
+            //@ts-ignore
+            session.user.refresh_token = promise.data.access_token;
+            //@ts-ignore
+            session.user.role = promise.data.role;
+            session.user.name = promise.data.name;
             config.headers.Authorization = `Bearer ${promise.data.user.access_token}`;
             return apiClient(config);
           })

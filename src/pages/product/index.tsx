@@ -28,10 +28,11 @@ const Product: NextPage<{ data: [product] }> = ({ data }) => {
     }
   };
   const onAddProduct = async (id: string, qty: number) => {
-    const data = JSON.stringify({
+    console.log("item", { id, qty });
+    const data = {
       count: qty,
       product_id: id,
-    });
+    };
     const result = await cartService.addProductToCart(data);
     console.log("result", result);
   };
