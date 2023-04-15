@@ -7,6 +7,7 @@ import Link from "next/link";
 import Router from "next/router";
 import { toast } from "react-hot-toast";
 import { accessories } from "../types/types";
+import cartService from "@/service/cart";
 
 const Accessories: NextPage<{ data: [accessories] }> = ({ data }) => {
   const { status } = useSession();
@@ -23,6 +24,16 @@ const Accessories: NextPage<{ data: [accessories] }> = ({ data }) => {
     if (result) {
       toast.success(result.name);
       refreshData();
+    }
+  };
+  const onAddAccessories = async (id: string, qty: number) => {
+    const data = {
+      count: qty,
+      accessories_id: id,
+    };
+    const result = await cartService.addProductToCart(data);
+    if (result.count !== 0) {
+      toast.success(`${result.count} Item added to cart`);
     }
   };
   return (
@@ -45,12 +56,14 @@ const Accessories: NextPage<{ data: [accessories] }> = ({ data }) => {
           {Array.from(data).map((data) => (
             <Card
               key={data._id}
+              id={data._id}
               title={data.name}
               size={data.size}
               price={data.price}
               color={data.color}
               onEdit={() => onEditAccessories(data._id)}
               onDelete={() => onDeleteAccessories(data._id)}
+              onAdd={onAddAccessories}
             />
           ))}
         </div>

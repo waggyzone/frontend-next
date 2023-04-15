@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  input[type="file" i]::-webkit-file-upload-button {
+    @apply border-none  h-full hover:bg-blue-500 rounded-sm;
+  }
+}
+
 @layer components {
   .login {
     @apply w-screen h-screen bg-gradient-to-r from-cyan-500
@@ -58,7 +64,4 @@
   .custom-radius {
     border-radius: 0% 0% 49% 50% / 0% 0% 14% 14%;
   }
-  // Start
-
-  //End
 }

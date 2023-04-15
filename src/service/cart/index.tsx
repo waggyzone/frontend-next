@@ -3,7 +3,7 @@ import { cart } from "@/pages/types/types";
 import { promises } from "dns";
 class CartService {
   addProductToCart = async (data: any) => {
-    apiClient
+    return apiClient
       .post(`/cart/create`, data)
       .then((promise) => promise.data)
       .catch((error) => {
@@ -16,12 +16,11 @@ class CartService {
       .get(`/cart/find`)
       .then((promise) => {
         if (promise !== undefined) {
-          
-          return promise.data
+          return promise.data;
         }
       })
       .catch((error) => {
-        console.log("cart",error)
+        console.log("cart", error);
         throw new Error(error);
       });
 
@@ -35,6 +34,13 @@ class CartService {
   remove = async (id: string | undefined) =>
     await apiClient
       .delete(`/cart/remove/${id}`)
+      .then((promise) => promise.data)
+      .catch((error) => {
+        throw new Error(error);
+      });
+  removeCartItemById = async (id: string | undefined) =>
+    await apiClient
+      .delete(`/cart/remove/item/${id}`)
       .then((promise) => promise.data)
       .catch((error) => {
         throw new Error(error);

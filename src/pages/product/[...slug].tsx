@@ -1,20 +1,23 @@
 //@ts-nocheck
 import { CreateProductValidationSchema } from "@/common/helper";
+
 import InputBox from "@/component/FormikField/InputBox";
 import StraightLoader from "@/component/Loader/StraightLoader";
 import ProductService from "@/service/product";
 import { Form, Formik } from "formik";
-import { NextPage } from "next";
+import { GetServerSideProps, NextPage } from "next";
+import Router from "next/router";
 import { useRef, useState } from "react";
 import { toast } from "react-hot-toast";
-import { GetServerSideProps } from "next";
 import { product } from "../types/types";
-import Router from "next/router";
+import FileInput from "@/component/FormikField/FileInput";
+import cloudUploadService from "@/service/cloudUpload";
 
 const initialValue = {
   name: "",
   brandname: "",
   price: 0,
+  image: "",
 };
 
 const Product: NextPage<{ slug?: string[]; data?: product }> = ({ slug = "add", data }) => {
@@ -70,7 +73,47 @@ const Product: NextPage<{ slug?: string[]; data?: product }> = ({ slug = "add", 
     //@ts-ignore
     addProductFormikRef.current.setFieldValue(data.target.name, data.target.value);
   };
-  console.log("firest", data);
+  // console.log("firest", data);
+  // const handleOnDropFile = (event) => {
+  //   // const imageUrl = addProductFormikRef.current.values.image;
+  //   // const formData = new FormData();
+  //   // formData.append("file", event.target.files[0]);
+  //   // console.log("data", { r });
+  //   // console.log("data", event.target.files[0]);
+  //   // addProductFormikRef.current.setFieldValue("image", "hia");
+  //   // if (imageUrl === "") {
+  //   //   cloudUploadService.upload();
+  //   // }
+  //   const upload = new tus.Upload(event.target.files[0], {
+  //     endpoint: process.env.NEXT_PUBLIC_API_UR?.concat("/file/upload"),
+  //     retryDelays: [0, 3000, 5000, 10000, 20000],
+  //     metadata: {
+  //       filename: file?.name,
+  //       filetype: file?.type,
+  //     },
+  //     onError: function (error) {
+  //       console.log("Failed because: " + error);
+  //     },
+  //     onProgress: function (bytesUploaded, bytesTotal) {
+  //       var percentage = ((bytesUploaded / bytesTotal) * 100).toFixed(2);
+  //       console.log(bytesUploaded, bytesTotal, percentage + "%");
+  //     },
+  //     onSuccess: function () {
+  //       console.log("Download %s from %s", upload.file.name, upload.url);
+  //     },
+  //   });
+
+  //   // Check if there are any previous uploads to continue.
+  //   upload.findPreviousUploads().then(function (previousUploads) {
+  //     // Found previous uploads so we select the first one.
+  //     if (previousUploads.length) {
+  //       upload.resumeFromPreviousUpload(previousUploads[0]);
+  //     }
+
+  //     // Start the upload
+  //     upload.start();
+  //   });
+  // };
   return (
     <div className="register">
       <div className="register__container">
@@ -114,7 +157,19 @@ const Product: NextPage<{ slug?: string[]; data?: product }> = ({ slug = "add", 
               placeholder="Enter a Product Price"
               onChange={(event: any) => handleChange(event)}
             />
-
+            {/* <FileInput
+              inputClassName="login__container__input"
+              labelClassName="login__container__label"
+              id="image"
+              label="Product Image"
+              name="image"
+              type="text"
+              value={data?.image}
+              placeholder="Provide an Image"
+              onDrop={(event) => handleOnDropFile(event)}
+              onFileChange={(event) => handleOnDropFile(event)}
+              onChange={(event: any) => handleChange(event)}
+            /> */}
             <div className="login__container__button">
               <button
                 type="submit"

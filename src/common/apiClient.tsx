@@ -1,5 +1,6 @@
 import axios from "axios";
-import { getSession } from "next-auth/react";
+import { getSession, signIn, signOut } from "next-auth/react";
+import Router from "next/router";
 
 const baseURL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -25,12 +26,6 @@ apiClient.interceptors.response.use(
       return Promise.reject(error);
     }
 
-    // Use a 'clean' instance of axios without the interceptor to refresh the token. No more infinite refresh loop.
-    // get("/auth/refresh", {
-    //     baseURL,
-    //     timeout: 30000,
-    //     headers: {},
-    //   })
     if (response.status === 401) {
       const session = await getSession();
       if (session) {
@@ -51,8 +46,12 @@ apiClient.interceptors.response.use(
             return apiClient(config);
           })
           .catch(() => {
+            signOut();
+            signIn();
             return Promise.reject(error);
           });
+      } else {
+        signIn();
       }
     }
 

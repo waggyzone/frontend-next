@@ -34,7 +34,9 @@ const Product: NextPage<{ data: [product] }> = ({ data }) => {
       product_id: id,
     };
     const result = await cartService.addProductToCart(data);
-    console.log("result", result);
+    if (result.count !== 0) {
+      toast.success(`${result.count} Item added to cart`);
+    }
   };
 
   return (

@@ -3,30 +3,27 @@ import React, { MouseEventHandler, useState } from "react";
 import Button from "../Button";
 
 const Card: React.FC<{
-  key?: string | number;
+  id?: string | number;
   title?: string;
   size?: string;
   price?: number;
   color?: string;
   onEdit?: MouseEventHandler<HTMLButtonElement>;
   onDelete?: MouseEventHandler<HTMLButtonElement>;
-}> = ({ key, title, size, price, color, onEdit, onDelete }) => {
+  onAdd: Function;
+}> = ({ id, title, size, price, color, onEdit, onDelete, onAdd, ...restProps }) => {
   const [quantity, setQuantity] = useState(1);
   const { data: session, status } = useSession();
 
-  function onAdd(key: string | number | undefined, quantity: number) {
-    throw new Error("Function not implemented.");
-  }
-
   return (
-    <div className="rounded-md overflow-hidden shadow-lg bg-white" key={key}>
+    <div className="rounded-md overflow-hidden shadow-lg bg-white" key={restProps.key}>
       <div className="px-6 py-4 flex flex-1 ">
         <div className="flex-[0.9]">
           <div className="font-bold text-xl mb-2">{title}</div>
           <p className="text-gray-700 text-base">{size}</p>
           <p className="text-gray-700 text-base">{color}</p>
         </div>
-        {status === "authenticated" ? (
+        {session?.user.role === "admin" ? (
           <div className="flex-[0.1] space-y-4">
             <Button
               onClick={onEdit}
@@ -46,7 +43,7 @@ const Card: React.FC<{
             <Button
               onClick={(event) => {
                 event.preventDefault();
-                onAdd(key, quantity);
+                onAdd(id, quantity);
               }}
               enableIcon
               type="cart"
