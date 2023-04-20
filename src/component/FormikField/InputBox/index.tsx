@@ -23,7 +23,6 @@ const InputBox: React.FC = (props: any): JSX.Element => {
         {...field}
         id={id}
         name={name}
-        value={value}
         type={type}
         placeholder={placeholder}
         onChange={(event) => props.onChange(event)}

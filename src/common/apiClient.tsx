@@ -11,6 +11,7 @@ const apiClient = axios.create({
 
 apiClient.interceptors.request.use(async (config) => {
   const session = await getSession();
+  console.log("s", session);
   if (session) {
     config.headers.Authorization = `Bearer ${session.user.access_token}`;
   }
@@ -47,7 +48,7 @@ apiClient.interceptors.response.use(
           })
           .catch(() => {
             signOut();
-            signIn();
+
             return Promise.reject(error);
           });
       } else {

@@ -2,7 +2,11 @@
 module.exports = {
   content: ["./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
-    extend: {},
+    extend: {
+      transitionProperty: {
+        position: "right,left,top,bottom,margin,padding",
+      },
+    },
   },
   plugins: [],
 };

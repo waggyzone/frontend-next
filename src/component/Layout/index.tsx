@@ -1,14 +1,20 @@
+import { useSession } from "next-auth/react";
 import Header from "../Header";
+import Footer from "../Footer";
+import { Router, useRouter } from "next/router";
 
-const Layout: React.FC<{ className?: string; children?: React.ReactNode }> = ({
+const Layout: React.FC<{ className?: string; children?: React.ReactNode; role?: string }> = ({
   className,
   children,
+  role,
 }) => {
+  // const { data } = useSession();
+  const { asPath, isReady } = useRouter();
   return (
-    <div className={`${className} layout`}>
-      <Header />
-      <main>{children}</main>
-    </div>
+    <main className={`${className} layout`}>
+      {!asPath.includes("admin") ? <Header /> : null}
+      {children}
+    </main>
   );
 };
 

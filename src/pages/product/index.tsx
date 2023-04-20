@@ -10,7 +10,7 @@ import { toast } from "react-hot-toast";
 import { product } from "../types/types";
 
 const Product: NextPage<{ data: [product] }> = ({ data }) => {
-  const { status } = useSession();
+  const { data: session, status } = useSession();
 
   const onEditProduct = (key: string | undefined) => {
     Router.push(`/product/edit/${key}`);
@@ -28,7 +28,6 @@ const Product: NextPage<{ data: [product] }> = ({ data }) => {
     }
   };
   const onAddProduct = async (id: string, qty: number) => {
-    console.log("item", { id, qty });
     const data = {
       count: qty,
       product_id: id,
@@ -38,6 +37,7 @@ const Product: NextPage<{ data: [product] }> = ({ data }) => {
       toast.success(`${result.count} Item added to cart`);
     }
   };
+  console.log("product", session);
 
   return (
     <div className="pt-32 w-screen">
@@ -62,6 +62,7 @@ const Product: NextPage<{ data: [product] }> = ({ data }) => {
               title={data.name}
               brandname={data.brandname}
               price={data.price}
+              image={data.image}
               onEdit={() => onEditProduct(data._id)}
               onDelete={() => onDeleteProduct(data._id)}
               onAdd={onAddProduct}>

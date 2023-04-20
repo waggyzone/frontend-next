@@ -2,31 +2,39 @@
 import { useState } from "react";
 import tus from "tus-js-client";
 
-export const useFileUpload = (file: File) => {
+export const useFileUpload = () => {
   const [progress, setProgress] = useState(0);
-  const upload = new tus.Upload(file, {
-    endpoint: process.env.NEXT_PUBLIC_API_UR?.concat("/file/upload"),
-    retryDelays: [0, 3000, 5000, 10000, 20000],
-    metadata: {
-      filename: file?.name,
-      filetype: file?.type,
-    },
-    onError: function (error) {
-      console.log("Failed because: " + error);
-    },
-    onProgress: function (bytesUploaded, bytesTotal) {
-      var percentage = ((bytesUploaded / bytesTotal) * 100).toFixed(2);
-      console.log(bytesUploaded, bytesTotal, percentage + "%");
-    },
-    onSuccess: function () {
-      console.log("Download %s from %s", upload.file.name, upload.url);
-    },
-  });
+  const [status, setStatus] = useState("progress");
 
-  upload.findPreviousUploads().then(function (previousUploads) {
-    if (previousUploads.length) {
-      upload.resumeFromPreviousUpload(previousUploads[0]);
-    }
-    upload.start();
-  });
+  const UploadFile = (file: File) => {
+    const upload = new tus.Upload(file, {
+      endpoint: process.env.NEXT_PUBLIC_API_UR?.concat("/file/upload"),
+      retryDelays: [0, 3000, 5000, 10000, 20000],
+      metadata: {
+        filename: file?.name,
+        filetype: file?.type,
+      },
+      onError: function (error) {
+        setStatus("error");
+      },
+      onProgress: function (bytesUploaded, bytesTotal) {
+        let percentage = ((bytesUploaded / bytesTotal) * 100).toFixed(2);
+        setProgress(Number(percentage));
+        setStatus("progress");
+      },
+      onSuccess: function () {
+        setStatus("success");
+      },
+    });
+
+    upload.findPreviousUploads().then(function (previousUploads) {
+      if (previousUploads.length) {
+        upload.resumeFromPreviousUpload(previousUploads[0]);
+      }
+      upload.start();
+    });
+  };
+
+  const result = { progress, status };
+  return [result, UploadFile];
 };

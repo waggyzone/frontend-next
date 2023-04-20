@@ -38,17 +38,13 @@ export const authOptions: NextAuthOptions = {
       return { ...token, ...user };
     },
     async session({ session, token, user }) {
-      console.log("user", {
-        token,
-        user,
-        session,
-      });
       //@ts-ignore
       session.user.access_token = token.access_token;
       //@ts-ignore
       session.user.refresh_token = token.refresh_token;
       //@ts-ignore
       session.user.role = token.role;
+
       return session;
     },
   },

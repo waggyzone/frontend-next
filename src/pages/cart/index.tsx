@@ -17,7 +17,7 @@ const Cart: NextPage = () => {
         });
     })();
   }, []);
-  console.log(data);
+ 
 
   const getItemAmout = (count: number, amount: number) => count * amount;
 

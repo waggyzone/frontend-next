@@ -1,3 +1,4 @@
+import Contact from "@/component/Contact";
 import { Inter } from "@next/font/google";
 import Head from "next/head";
 
@@ -13,7 +14,7 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className=" w-screen h-screen  flex-1 flex  flex-col overflow-auto bg-no-repeat  snap-y snap-mandatory">
+      <div className=" w-screen h-screen  flex-1 flex  flex-col overflow-auto bg-no-repeat overflow-x-hidden  snap-y snap-mandatory">
         <section
           id="home"
           className="snap-start justifiy-between items-center bg-no-repeat "
@@ -31,54 +32,94 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="snap-start">
-          <div className="bg-white-500 w-screen h-screen">
-            <div className="text-red-500 text-6xl w-screen font-serif-Times New Roman text-left px-20 py-20">
+        <section className="snap-start ">
+          <div className="container mx-auto py-32 text-[#3c6e71] space-y-10">
+            <div className=" text-4xl text-center ">
               <h1>
                 <b> Services </b>For <br />
                 Your <b>Pets</b>
               </h1>
-              <div className="text-gray-500 text-3xl  font-sans-ui-sans-serif text-left px-10 py-10">
+              <h4>
+                {" "}
+                <i>We care the way you care</i>
+              </h4>
+            </div>
+            <div className="w-full  flex  justify-between items-center">
+              <div className="m-4 flex flex-col justify-between items-center gap-5 ">
+                <span className="font-bond text-black text-2xl flex justify-between ">
+                  GROOMING
+                </span>
+                <img
+                  src="Images/grooming.jpg"
+                  className="w-[20rem] h-[15rem] rounded-full shadow-2xl hover:scale-125 transition-all"
+                />
+              </div>
+              <div className="m-4 flex flex-col justify-between items-center gap-5">
+                <span className="font-bond text-black text-2xl flex justify-between ">DAYCARE</span>
+                <img
+                  src="Images/daycare.jpeg"
+                  className="w-[20rem] h-[15rem] rounded-full shadow-2xl  hover:scale-125 transition-all "
+                />
+              </div>
+              <div className="m-4 flex flex-col justify-between items-center gap-5 ">
+                <span className="font-bond text-black text-2xl flex justify-between ">
+                  TRAINING
+                </span>
+                <img
+                  src="Images/training.webp"
+                  className="w-[20rem] h-[15rem] rounded-full shadow-2xl hover:scale-125 transition-all"
+                />
+              </div>
+            </div>
+          </div>
+          {/* <div className="bg-white-500 w-screen h-screen container mx-auto">
+            <div className="text-red-500 text-6xl w-screen font-serif-Times_New_Roman text-left">
+              <h1 className="">
+                <b> Services </b>For <br />
+                Your <b>Pets</b>
                 <h4>
                   {" "}
                   <i>We care the way you care</i>
                 </h4>
-                <div className="flex justify-between px-20 py-20  ">
-                  <img
-                    src="Images/grooming.jpg"
-                    className="w-[20rem] h-[15rem] rounded-full shadow-2xl "
-                  />
-                  <div className="m-4">
+              </h1>
+              <div className="text-gray-500 text-3xl  font-sans-ui-sans-serif text-left px-10 py-10">
+                <div className="flex justify-between container mx-auto w-screen overflow-x-auto ">
+                  <div className="m-4 flex flex-col justify-between items-center gap-5">
                     <span className="font-bond text-black text-2xl flex justify-between ">
                       GROOMING
                     </span>
+                    <img
+                      src="Images/grooming.jpg"
+                      className="w-[20rem] h-[15rem] rounded-full shadow-2xl "
+                    />
                   </div>
-                  <img
-                    src="Images/daycare.jpeg"
-                    className="w-[20rem] h-[15rem] rounded-full shadow-2xl  "
-                  />
-                  <div className="m-4">
-                    <span className="font-bond text-black text-2xl flex justify-between">
+                  <div className="m-4 flex flex-col justify-between items-center gap-5">
+                    <span className="font-bond text-black text-2xl flex justify-between ">
                       DAYCARE
                     </span>
+                    <img
+                      src="Images/daycare.jpeg"
+                      className="w-[20rem] h-[15rem] rounded-full shadow-2xl "
+                    />
                   </div>
-                  <img
-                    src="Images/training.webp"
-                    className="w-[20rem] h-[15rem] rounded-full shadow-2xl "
-                  />
-                  <div className="m-4">
-                    <span className="font-bond text-black text-xl flex justify-between">
+                  <div className="m-4 flex flex-col justify-between items-center gap-5">
+                    <span className="font-bond text-black text-2xl flex justify-between ">
                       TRAINING
                     </span>
+                    <img
+                      src="Images/training.webp"
+                      className="w-[20rem] h-[15rem] rounded-full shadow-2xl "
+                    />
                   </div>
+                  
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
         </section>
 
         <section className="snap-start">
-          <div className="bg-white-500 w-screen h-screen">
+          {/* <div className="bg-white-500 w-screen h-screen">
             <div className="w-[30rem] h-[15rem] px-10 py-20">
               <img src="Images/cat dog.jpg" />
             </div>
@@ -99,10 +140,13 @@ export default function Home() {
                 </h4>
               </div>
             </div>
-          </div>
+          </div> */}
+        </section>
+        <section className="bg-white dark:bg-gray-900 snap-start">
+          <Contact />
         </section>
 
-        <section className="snap-start">
+        {/* <section className="snap-start">
           <div className="bg-white-500 w-screen h-screen">
             <div className="text-black-500 text-5xl w-screen font-serif text-left px-10 py-20">
               <h1>
@@ -174,7 +218,7 @@ export default function Home() {
             </form>
             <img src="Images/contact.jpg" className="w-[20rem] h-[15rem] r shadow-2xl   " />
           </div>
-        </section>
+        </section> */}
       </div>
     </>
   );

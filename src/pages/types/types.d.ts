@@ -6,11 +6,17 @@ export type createUser = {
   password: string;
 };
 
+export type UserRoleUpdate = {
+  role: string;
+};
+
 export type product = {
   _id: string;
   name: string;
   brandname: string;
   price: number;
+  image: string;
+  public_id: string;
 };
 export type accessories = {
   _id: string;
@@ -18,6 +24,8 @@ export type accessories = {
   size: string;
   price: number;
   color: string;
+  image: string;
+  public_id: string;
 };
 
 export type cart = {

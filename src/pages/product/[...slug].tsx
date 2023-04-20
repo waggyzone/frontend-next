@@ -12,46 +12,61 @@ import { toast } from "react-hot-toast";
 import { product } from "../types/types";
 import FileInput from "@/component/FormikField/FileInput";
 import cloudUploadService from "@/service/cloudUpload";
+import { useFileUpload } from "@/hook/useFileUpload";
+import Image from "next/image";
+import DeleteIcon from "@/component/Icon/Delete.Icon";
 
 const initialValue = {
   name: "",
   brandname: "",
   price: 0,
   image: "",
+  public_id: "",
 };
 
 const Product: NextPage<{ slug?: string[]; data?: product }> = ({ slug = "add", data }) => {
   const addProductFormikRef = useRef();
   const [loader, setLoader] = useState<Boolean>(false);
+  const [hover, setHover] = useState<Boolean>(false);
 
-  const createProduct = (values: typeof initialValue) => {
-    ProductService.create(values)
-      .then((promise) => {
-        if (promise) {
-          toast.success("New product Added");
-          Router.replace(`/product`);
-        } else {
-          toast.loading("Something went wrong");
-        }
-      })
-      .catch((error) => {
-        toast.error(error);
-      });
+  const formData = new FormData();
+  const createProduct = async (values: typeof initialValue) => {
+    const result = await cloudUploadService.upload(formData);
+    if (result) {
+      initialValue.public_id = result.public_id;
+      addProductFormikRef.current.setFieldValue("image", result.url);
+      values.image = result.url;
+      values.public_id = result.public_id;
+      ProductService.create(values)
+        .then((promise) => {
+          if (promise) {
+            toast.success("New product Added");
+            Router.replace(`/product`);
+          } else {
+            toast.loading("Something went wrong");
+          }
+        })
+        .catch((error) => {
+          toast.error(error);
+        });
+    }
   };
 
-  const updateProduct = (id: string, values: typeof initialValue) => {
-    ProductService.update(id, values)
-      .then((promise) => {
-        if (promise) {
-          toast.success("Product Updated");
-          Router.replace(`/product`);
-        } else {
-          toast.loading("Something went wrong");
-        }
-      })
-      .catch((error) => {
-        toast.error(error);
-      });
+  const updateProduct = async (id: string, values: typeof initialValue) => {
+    await cloudUploadService.removeUpladByPublicId(values.public_id).then(() => {
+      ProductService.update(id, values)
+        .then((promise) => {
+          if (promise) {
+            toast.success("Product Updated");
+            Router.replace(`/product`);
+          } else {
+            toast.loading("Something went wrong");
+          }
+        })
+        .catch((error) => {
+          toast.error(error);
+        });
+    });
   };
 
   const onCreateProductFormSubmit = (values: typeof initialValue) => {
@@ -70,59 +85,24 @@ const Product: NextPage<{ slug?: string[]; data?: product }> = ({ slug = "add", 
    * @description setField values for the respective inputs
    */
   const handleChange = (data: { target: { name: any; value: any } }): void => {
+    console.log("dd", data.target.value);
     //@ts-ignore
     addProductFormikRef.current.setFieldValue(data.target.name, data.target.value);
   };
-  // console.log("firest", data);
-  // const handleOnDropFile = (event) => {
-  //   // const imageUrl = addProductFormikRef.current.values.image;
-  //   // const formData = new FormData();
-  //   // formData.append("file", event.target.files[0]);
-  //   // console.log("data", { r });
-  //   // console.log("data", event.target.files[0]);
-  //   // addProductFormikRef.current.setFieldValue("image", "hia");
-  //   // if (imageUrl === "") {
-  //   //   cloudUploadService.upload();
-  //   // }
-  //   const upload = new tus.Upload(event.target.files[0], {
-  //     endpoint: process.env.NEXT_PUBLIC_API_UR?.concat("/file/upload"),
-  //     retryDelays: [0, 3000, 5000, 10000, 20000],
-  //     metadata: {
-  //       filename: file?.name,
-  //       filetype: file?.type,
-  //     },
-  //     onError: function (error) {
-  //       console.log("Failed because: " + error);
-  //     },
-  //     onProgress: function (bytesUploaded, bytesTotal) {
-  //       var percentage = ((bytesUploaded / bytesTotal) * 100).toFixed(2);
-  //       console.log(bytesUploaded, bytesTotal, percentage + "%");
-  //     },
-  //     onSuccess: function () {
-  //       console.log("Download %s from %s", upload.file.name, upload.url);
-  //     },
-  //   });
 
-  //   // Check if there are any previous uploads to continue.
-  //   upload.findPreviousUploads().then(function (previousUploads) {
-  //     // Found previous uploads so we select the first one.
-  //     if (previousUploads.length) {
-  //       upload.resumeFromPreviousUpload(previousUploads[0]);
-  //     }
+  const handleOnDropFile = async (event) => {
+    formData.append("file", event.target.files[0]);
+  };
 
-  //     // Start the upload
-  //     upload.start();
-  //   });
-  // };
   return (
-    <div className="register">
+    <div className="register w-ful">
       <div className="register__container">
         <Formik
           innerRef={addProductFormikRef}
-          initialValues={initialValue}
+          initialValues={data ?? initialValue}
           validationSchema={CreateProductValidationSchema}
           onSubmit={onCreateProductFormSubmit}>
-          <Form>
+          <Form noValidate>
             <span className="text-3xl animate-pulse capitalize"> {slug[0].toString()} Product</span>
             <InputBox
               inputClassName="login__container__input"
@@ -131,7 +111,6 @@ const Product: NextPage<{ slug?: string[]; data?: product }> = ({ slug = "add", 
               label="Product Name"
               name="name"
               type="text"
-              value={data?.name}
               placeholder="Enter a Product Name"
               onChange={(event: any) => handleChange(event)}
             />
@@ -142,7 +121,6 @@ const Product: NextPage<{ slug?: string[]; data?: product }> = ({ slug = "add", 
               label="BrandName Name"
               name="brandname"
               type="text"
-              value={data?.brandname}
               placeholder="Enter a Product Brand Name"
               onChange={(event: any) => handleChange(event)}
             />
@@ -157,24 +135,28 @@ const Product: NextPage<{ slug?: string[]; data?: product }> = ({ slug = "add", 
               placeholder="Enter a Product Price"
               onChange={(event: any) => handleChange(event)}
             />
-            {/* <FileInput
+            <FileInput
               inputClassName="login__container__input"
               labelClassName="login__container__label"
               id="image"
               label="Product Image"
               name="image"
               type="text"
-              value={data?.image}
               placeholder="Provide an Image"
               onDrop={(event) => handleOnDropFile(event)}
               onFileChange={(event) => handleOnDropFile(event)}
               onChange={(event: any) => handleChange(event)}
-            /> */}
+            />
+
             <div className="login__container__button">
               <button
                 type="submit"
                 className="bg-[#FF3E4D] p-2 h-14 rounded-[0.75rem] text-black hover:bg-emerald-500 hover:text-green-900 flex justify-center items-center">
-                {loader ? <StraightLoader className="h-6 w-20" /> : <span>Create</span>}
+                {loader ? (
+                  <StraightLoader className="h-6 w-20" />
+                ) : (
+                  <span>{slug[0] === "edit" ? "Edit" : "Create"}</span>
+                )}
               </button>
             </div>
           </Form>
