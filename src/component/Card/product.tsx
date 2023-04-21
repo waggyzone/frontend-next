@@ -15,7 +15,7 @@ const Card: React.FC<{
 }> = ({ id, title, brandname, price, onEdit, onDelete, onAdd, image, ...restProps }) => {
   const [quantity, setQuantity] = useState(1);
   const { data: session, status } = useSession();
-  console.log("hia");
+
   return (
     <div className="rounded-md overflow-hidden shadow-lg bg-white" key={restProps.key}>
       <div className=" flex flex-1 py-2">

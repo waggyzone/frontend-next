@@ -37,6 +37,7 @@ const Login: NextPage = () => {
    * @param values
    */
   const onLoginFormSubmit = async (values: typeof initialValue) => {
+    console.log("has", values);
     setLoader(true);
     await signIn("credentials", {
       redirect: false,
