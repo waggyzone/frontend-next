@@ -3,6 +3,7 @@ import Link from "next/link";
 import Router from "next/router";
 import React from "react";
 import Shop from "../Icon/Shop.Icon";
+import { Logo } from "../Icon/Logo";
 
 const Header: React.FC = () => {
   const { status } = useSession();
@@ -35,7 +36,9 @@ const Header: React.FC = () => {
   };
   return (
     <header className="flex flex-row justify-between w-screen px-[4.6875rem] h-16 items-center fixed z-30 top-0 bg-slate-50">
-      <div>logo</div>
+      <div>
+        <Logo />
+      </div>
       <nav className="space-x-6 flex flex-row">
         <Link href="/">Home</Link>
         <Link href="/product">Product</Link>
