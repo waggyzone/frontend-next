@@ -24,6 +24,7 @@ const InputBox: React.FC = (props: any): JSX.Element => {
         id={id}
         name={name}
         type={type}
+        {...props}
         placeholder={placeholder}
         onChange={(event) => props.onChange(event)}
         className={`${props.inputClassName}`}

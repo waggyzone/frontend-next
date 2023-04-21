@@ -22,4 +22,9 @@ export const menuAside: MenuAsideItem[] = [
     icon: mdiScissorsCutting,
     label: "Grommer",
   },
+  {
+    href: "/admin/store",
+    icon: mdiScissorsCutting,
+    label: "Store",
+  },
 ];

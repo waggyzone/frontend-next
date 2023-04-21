@@ -42,6 +42,7 @@ const Header: React.FC = () => {
         <Link href="/accessories">Accessories</Link>
         <Link href="/store">Store</Link>
         <Link href="/cart">Cart</Link>
+        <Link href="/addpet">Pet</Link>
 
         {status === "authenticated" ? (
           <button onClick={(event) => onLogOutClick(event)}>Logout</button>

@@ -28,6 +28,17 @@ export type accessories = {
   public_id: string;
 };
 
+export type store = {
+  _id: string;
+  name: string;
+  breed: string;
+  price: number;
+  color: string;
+  image: string;
+  public_id: string;
+  dob: Date;
+};
+
 export type cart = {
   _id?: string;
   product_id: string;

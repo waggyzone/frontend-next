@@ -23,7 +23,7 @@ const Card: React.FC<{
           {image ? (
             <Image
               className="h-48 w-40 -my-2 flex-none bg-cover text-center overflow-hidden rounded-l-md"
-              src="https://res.cloudinary.com/dabzajcsi/image/upload/v1682020253/images/vvhtyoag1nrjrfniiutz.jpg"
+              src={image}
               width={100}
               height={100}
               alt={`${title}`}

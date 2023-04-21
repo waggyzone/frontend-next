@@ -9,10 +9,13 @@ const Card: React.FC<{
   name?: string;
   breed?: string;
   price?: number;
+  dob?: string;
+  image?: string;
+  owner?: any;
   onEdit?: MouseEventHandler<HTMLButtonElement>;
   onDelete?: MouseEventHandler<HTMLButtonElement>;
   onAdd: Function;
-}> = ({ id, title,name, price, onEdit, onDelete, onAdd, image, ...restProps }) => {
+}> = ({ id, title, name, price, onEdit, onDelete, onAdd, image, dob, owner, ...restProps }) => {
   const [quantity, setQuantity] = useState(1);
   const { data: session, status } = useSession();
   console.log("hia");
@@ -23,7 +26,7 @@ const Card: React.FC<{
           {image ? (
             <Image
               className="h-48 w-40 -my-2 flex-none bg-cover text-center overflow-hidden rounded-l-md"
-              src="https://res.cloudinary.com/dabzajcsi/image/upload/v1682020253/images/vvhtyoag1nrjrfniiutz.jpg"
+              src={image}
               width={100}
               height={100}
               alt={`${title}`}
@@ -44,13 +47,24 @@ const Card: React.FC<{
             </div>
           )}
 
-          <div className="font-bold text-xl ">
-            {title}
-            <p className="text-gray-700 text-base">{name}</p>
-            <div className="pt-4 pb-2">
-              <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-                &#8377; {price}
-              </span>
+          <div className="font-bold text-xl flex  ">
+            <div>
+              {title}
+              <p className="text-gray-700 text-base">{name}</p>
+              <div className="pt-4 pb-2">
+                <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
+                  &#8377; {price}
+                </span>
+              </div>
+              <div className="pt-4 pb-2">
+                <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
+                  {new Date(dob).toISOString()}
+                </span>
+              </div>
+            </div>
+            <div>
+              {owner.firstName} {owner.lastName}
+              <span>{owner?.mobile}</span>
             </div>
           </div>
         </div>
@@ -78,29 +92,10 @@ const Card: React.FC<{
                 onAdd(id, quantity);
               }}
               enableIcon
-              type="cart"
+              label="Enquire"
+              // type="cart"
               className="bg-slate-300 rounded-md shadow-md hover:scale-105"
             />
-            <div className="h-7 flex flex-row bg-red-600 rounded-full items-center">
-              <button
-                className="bg-slate-500 rounded-l-full h-7 w-5 flex items-center justify-center"
-                onClick={() => setQuantity((prev) => prev + 1)}>
-                +
-              </button>
-              <span className="px-1 w-fit">{quantity}</span>
-              <button
-                className="bg-slate-500 rounded-r-full h-7 w-5 flex items-center justify-center"
-                onClick={() =>
-                  setQuantity((prev) => {
-                    if (prev > 1) {
-                      return prev - 1;
-                    }
-                    return prev;
-                  })
-                }>
-                -
-              </button>
-            </div>
           </div>
         )}
       </div>
