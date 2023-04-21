@@ -17,7 +17,6 @@ const Cart: NextPage = () => {
         });
     })();
   }, []);
- 
 
   const getItemAmout = (count: number, amount: number) => count * amount;
 
@@ -123,6 +122,11 @@ const Cart: NextPage = () => {
                 </tr>
               </tbody>
             </table>
+            <div className=" mt-5 flex justify-center items-center ">
+              <button className="bg-blue-500 hover:bg-emerald-400 transition-all shadow-lg w-96 m-2 h-20 rounded-2xl">
+                Make Payment{" "}
+              </button>
+            </div>
           </div>
         ) : (
           <div className="w-full h-full flex justify-center items-center text-3xl">

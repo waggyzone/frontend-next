@@ -18,9 +18,7 @@ const initialValue = {
   color: "",
   image: "",
   public_id: "",
-  
 };
-
 
 const Accessories: NextPage<{ slug?: string[]; data?: accessories }> = ({ slug = "add", data }) => {
   const addAccessoriesFormikRef = useRef();
@@ -39,7 +37,7 @@ const Accessories: NextPage<{ slug?: string[]; data?: accessories }> = ({ slug =
         .then((promise) => {
           if (promise) {
             toast.success("New sccessorie Added");
-            Router.replace(`/accessorie`);
+            Router.replace(`/accessories`);
           } else {
             toast.loading("Something went wrong");
           }
@@ -49,7 +47,6 @@ const Accessories: NextPage<{ slug?: string[]; data?: accessories }> = ({ slug =
         });
     }
   };
-
 
   const updateAccessories = async (id: string, values: typeof initialValue) => {
     await cloudUploadService.removeUpladByPublicId(values.public_id).then(() => {
@@ -66,117 +63,119 @@ const Accessories: NextPage<{ slug?: string[]; data?: accessories }> = ({ slug =
           toast.error(error);
         });
     });
-    };
+  };
 
-    const onCreateAccessoriesFormSubmit = (values: typeof initialValue) => {
-      if (slug[0] === "add") {
-        createAccessories(values);
-      }
-      if (slug[0] === "edit") {
-        updateAccessories(slug[1], values);
-      }
-    };
+  const onCreateAccessoriesFormSubmit = (values: typeof initialValue) => {
+    if (slug[0] === "add") {
+      createAccessories(values);
+    }
+    if (slug[0] === "edit") {
+      updateAccessories(slug[1], values);
+    }
+  };
 
-    /**
-     * @namespace Register
-     * @function handleChange
-     * @param data
-     * @description setField values for the respective inputs
-     */
-    const handleChange = (data: { target: { name: any; value: any } }): void => {
-      console.log("dd", data.target.value);
-      //@ts-ignore
-      addAccessoriesFormikRef.current.setFieldValue(data.target.name, data.target.value);
-    };
-    const handleOnDropFile = async (event) => {
-      formData.append("file", event.target.files[0]);
-    };
-    
+  /**
+   * @namespace Register
+   * @function handleChange
+   * @param data
+   * @description setField values for the respective inputs
+   */
+  const handleChange = (data: { target: { name: any; value: any } }): void => {
+    console.log("dd", data.target.value);
+    //@ts-ignore
+    addAccessoriesFormikRef.current.setFieldValue(data.target.name, data.target.value);
+  };
+  const handleOnDropFile = async (event) => {
+    formData.append("file", event.target.files[0]);
+  };
 
-    return (
-      <div className="register">
-        <div className="register__container">
-          <Formik
-            innerRef={addAccessoriesFormikRef}
-            initialValues={data ?? initialValue}
-            validationSchema={CreateAccessoriesValidationSchema}
-            onSubmit={onCreateAccessoriesFormSubmit}>
-            <Form noValidate>
-            <span className="text-3xl animate-pulse capitalize"> {slug[0].toString()} Accessories</span>
-              <InputBox
-                inputClassName="login__container__input"
-                labelClassName="login__container__label"
-                id="accessories"
-                label="Accessorie Name"
-                name="name"
-                type="text"
-                value={data?.name}
-                placeholder="Enter a Accessorie Name"
-                onChange={(event: any) => handleChange(event)}
-              />
-              <InputBox
-                inputClassName="login__container__input"
-                labelClassName="login__container__label"
-                id="size"
-                label="Size"
-                name="size"
-                type="text"
-                value={data?.size}
-                placeholder="Enter the size"
-                onChange={(event: any) => handleChange(event)}
-              />
-              <InputBox
-                inputClassName="login__container__input"
-                labelClassName="login__container__label"
-                id="price"
-                label="Price"
-                name="price"
-                type="number"
-                value={data?.price}
-                placeholder="Enter a Accessorie Price"
-                onChange={(event: any) => handleChange(event)}
-              />
-              <InputBox
-                inputClassName="login__container__input"
-                labelClassName="login__container__label"
-                id="accessories"
-                label="Color"
-                name="color"
-                type="text"
-                value={data?.color}
-                placeholder="Enter the color"
-                onChange={(event: any) => handleChange(event)}
-              />
-              <FileInput
-                inputClassName="login__container__input"
-                labelClassName="login__container__label"
-                id="image"
-                label="Accessorie Image"
-                name="image"
-                type="text"
-                placeholder="Provide an Image"
-                onDrop={(event) => handleOnDropFile(event)}
-                onFileChange={(event) => handleOnDropFile(event)}
-                onChange={(event: any) => handleChange(event)}
-              />
-              <div className="login__container__button">
-                <button
-                  type="submit"
-                  className="bg-[#FF3E4D] p-2 h-14 rounded-[0.75rem] text-black hover:bg-emerald-500 hover:text-green-900 flex justify-center items-center">
-                  {loader ? (
-                    <StraightLoader className="h-6 w-20" />
-                  ) : (
-                    <span>{slug[0] === "edit" ? "Edit" : "Create"}</span>
-                  )}
-                </button>
-              </div>
-            </Form>
-          </Formik>
-        </div>
+  return (
+    <div className="register">
+      <div className="register__container">
+        <Formik
+          innerRef={addAccessoriesFormikRef}
+          initialValues={data ?? initialValue}
+          validationSchema={CreateAccessoriesValidationSchema}
+          onSubmit={onCreateAccessoriesFormSubmit}>
+          <Form noValidate>
+            <span className="text-3xl animate-pulse capitalize">
+              {" "}
+              {slug[0].toString()} Accessories
+            </span>
+            <InputBox
+              inputClassName="login__container__input"
+              labelClassName="login__container__label"
+              id="accessories"
+              label="Accessorie Name"
+              name="name"
+              type="text"
+              value={data?.name}
+              placeholder="Enter a Accessorie Name"
+              onChange={(event: any) => handleChange(event)}
+            />
+            <InputBox
+              inputClassName="login__container__input"
+              labelClassName="login__container__label"
+              id="size"
+              label="Size"
+              name="size"
+              type="text"
+              value={data?.size}
+              placeholder="Enter the size"
+              onChange={(event: any) => handleChange(event)}
+            />
+            <InputBox
+              inputClassName="login__container__input"
+              labelClassName="login__container__label"
+              id="price"
+              label="Price"
+              name="price"
+              type="number"
+              value={data?.price}
+              placeholder="Enter a Accessorie Price"
+              onChange={(event: any) => handleChange(event)}
+            />
+            <InputBox
+              inputClassName="login__container__input"
+              labelClassName="login__container__label"
+              id="accessories"
+              label="Color"
+              name="color"
+              type="text"
+              value={data?.color}
+              placeholder="Enter the color"
+              onChange={(event: any) => handleChange(event)}
+            />
+            <FileInput
+              inputClassName="login__container__input"
+              labelClassName="login__container__label"
+              id="image"
+              label="Accessorie Image"
+              name="image"
+              type="text"
+              placeholder="Provide an Image"
+              onDrop={(event) => handleOnDropFile(event)}
+              onFileChange={(event) => handleOnDropFile(event)}
+              onChange={(event: any) => handleChange(event)}
+            />
+            <div className="login__container__button">
+              <button
+                type="submit"
+                className="bg-[#FF3E4D] p-2 h-14 rounded-[0.75rem] text-black hover:bg-emerald-500 hover:text-green-900 flex justify-center items-center">
+                {loader ? (
+                  <StraightLoader className="h-6 w-20" />
+                ) : (
+                  <span>{slug[0] === "edit" ? "Edit" : "Create"}</span>
+                )}
+              </button>
+            </div>
+          </Form>
+        </Formik>
       </div>
-    );
-}
-            
+    </div>
+  );
+};
+
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const slug = (ctx.query.slug as string[]) ?? [];
   let result;

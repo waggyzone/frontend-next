@@ -61,6 +61,7 @@ const Accessories: NextPage<{ data: [accessories] }> = ({ data }) => {
               size={data.size}
               price={data.price}
               color={data.color}
+              image={data.image}
               onEdit={() => onEditAccessories(data._id)}
               onDelete={() => onDeleteAccessories(data._id)}
               onAdd={onAddAccessories}
