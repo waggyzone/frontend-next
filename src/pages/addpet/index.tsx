@@ -31,7 +31,6 @@ const AddPet: NextPage<{ slug?: string[]; data?: product }> = ({ slug = "add", d
   const formData = new FormData();
 
   const createAddPet = async (values: typeof initialValue) => {
-    // console.log("valu", values);
     setLoader(true);
     const result = await cloudUploadService.upload(formData);
     if (result) {

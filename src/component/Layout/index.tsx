@@ -11,7 +11,7 @@ const Layout: React.FC<{ className?: string; children?: React.ReactNode; role?: 
   // const { data } = useSession();
   const { asPath, isReady } = useRouter();
   return (
-    <main className={`${className} layout`}>
+    <main className={`${className} layout scroll-x-hidden`}>
       {!asPath.includes("admin") ? <Header /> : null}
       {children}
     </main>

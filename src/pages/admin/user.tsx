@@ -1,5 +1,6 @@
 import AdminLayout from "@/component/AdminLayout";
 import DeleteIcon from "@/component/Icon/Delete.Icon";
+import DogLoader from "@/component/Loader/DogLoader";
 import Table from "@/component/Table";
 import { useFetcher } from "@/hook/useFertcher";
 import user from "@/service/user";
@@ -70,7 +71,7 @@ const User = () => {
                       </select>
                     </td>
                     <td>
-                      <button className="bg-orange-400 w-full items-center flex justify-center">
+                      <button className="w-full items-center flex justify-center">
                         <DeleteIcon className="w-6 h-auto" />
                       </button>
                     </td>
@@ -89,7 +90,7 @@ const User = () => {
                   breakLabel="..."
                   nextLabel=">"
                   previousLabel="<"
-                  initialPage={1}
+                  initialPage={0}
                   pageRangeDisplayed={data[0].pagination[0].total}
                   pageCount={Math.ceil(data[0].pagination[0].total / perPage)}
                   onPageChange={(event) => {
@@ -100,7 +101,9 @@ const User = () => {
             </div>
           </div>
         ) : (
-          <p>Loadin</p>
+          <div className="w-full h-full flex justify-center items-center">
+            <DogLoader />
+          </div>
         )}
       </section>
     </React.Fragment>

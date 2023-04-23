@@ -1,40 +1,29 @@
+import CounterButton from "@/component/CounterButton";
+import { useFetcher } from "@/hook/useFertcher";
 import cartService from "@/service/cart";
 import { NextPage } from "next";
 import Head from "next/head";
 import { useEffect, useState } from "react";
+import { toast } from "react-hot-toast";
 
 const Cart: NextPage = () => {
-  const [data, setData] = useState([]);
-  useEffect(() => {
-    (async () => {
-      await cartService
-        .findAllCartItems()
-        .then((promise) => {
-          setData(promise);
-        })
-        .catch((error) => {
-          console.log("pri", error);
-        });
-    })();
-  }, []);
+  // const [data, setData] = useState([]);
+  const { data, isLoading, mutate } = useFetcher(`${process.env.NEXT_PUBLIC_API_URL}/cart/find`);
 
+  console.log("data", data);
   const getItemAmout = (count: number, amount: number) => count * amount;
 
-  // const totalAmount = (_data: any) =>
-  //   _data.reduce(accumulator, next) => accumulator + getItemAmout(next.count, next?.product_id?.price ?? next?.accessories_id?.price);
   const totalAmount = (_data: any[]) => {
     try {
-      if (Array.from(_data).length !== 0) {
-        return Array?.from(_data).reduce((accumulator, nextValue) => {
-          accumulator =
-            accumulator +
-            getItemAmout(
-              nextValue?.count,
-              nextValue?.product_id?.price ?? nextValue?.accessories_id?.price
-            );
-          return accumulator;
-        }, 0);
-      }
+      return _data?.reduce((accumulator, nextValue) => {
+        accumulator =
+          accumulator +
+          getItemAmout(
+            nextValue?.count,
+            nextValue?.product_id?.price ?? nextValue?.accessories_id?.price
+          );
+        return accumulator;
+      }, 0);
     } catch (error) {
       throw error;
     }
@@ -43,13 +32,23 @@ const Cart: NextPage = () => {
   const removeItem = async (id: string) => {
     await cartService.removeCartItemById(id).then((promise) => {
       if (promise.deletedCount === 1) {
-        const _data = [...data];
-        const result = _data.filter(
-          (val: any) => val.product_id?._id !== id || val.accessories_id?._id !== id
-        );
-        setData(result);
+        mutate();
       }
     });
+  };
+
+  const onChangeQuantity = (qty: number, id: string) => {
+    (async () => {
+      await cartService.update(id, { count: qty }).then((promise) => {
+        mutate();
+        toast.success("Updated Cart");
+      });
+    })();
+  };
+
+  const onMakePayment = async (event: any) => {
+    const result = await cartService.createOrder();
+    console.log("result create", result);
   };
 
   // const onQuantityChanges = ()
@@ -63,7 +62,7 @@ const Cart: NextPage = () => {
         <div className="flex justify-between items-center pb-2">
           <span>Cart</span>
         </div>
-        {data?.length !== 0 ? (
+        {!isLoading ? (
           <div className="overflow-hidden rounded-lg border border-gray-200 shadow-md m-5 text-black">
             <table className="table-auto w-full border-collapse bg-white text-left text-sm ">
               <thead className="bg-gray-400">
@@ -76,12 +75,19 @@ const Cart: NextPage = () => {
                 </tr>
               </thead>
               <tbody>
-                {data?.map((_data: any, index) => (
+                {data?.map((_data: any, index: number) => (
                   // <Card title={_data?.product_id?.brandname ?? _data?.accessories_id?.name} />
+
                   <tr key={index} className="px-4 py-6 mx-4">
                     <td>{_data?.product_id?.brandname ?? _data?.accessories_id?.name}</td>
                     <td>{_data?.product_id?.price ?? _data?.accessories_id?.price}</td>
-                    <td>{_data.count}</td>
+                    <td>
+                      <CounterButton
+                        id={_data._id}
+                        defaultValue={_data?.count}
+                        onChange={onChangeQuantity}
+                      />
+                    </td>
                     <td>
                       {getItemAmout(
                         _data?.count,
@@ -123,8 +129,10 @@ const Cart: NextPage = () => {
               </tbody>
             </table>
             <div className=" mt-5 flex justify-center items-center ">
-              <button className="bg-blue-500 hover:bg-emerald-400 transition-all shadow-lg w-96 m-2 h-20 rounded-2xl">
-                Make Payment{" "}
+              <button
+                className="bg-blue-500 hover:bg-emerald-400 transition-all shadow-lg w-96 m-2 h-20 rounded-2xl"
+                onClick={(event) => onMakePayment(event)}>
+                Make Payment
               </button>
             </div>
           </div>
@@ -139,3 +147,4 @@ const Cart: NextPage = () => {
 };
 
 export default Cart;
+Cart.auth = true;

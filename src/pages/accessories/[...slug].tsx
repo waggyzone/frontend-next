@@ -81,7 +81,6 @@ const Accessories: NextPage<{ slug?: string[]; data?: accessories }> = ({ slug =
    * @description setField values for the respective inputs
    */
   const handleChange = (data: { target: { name: any; value: any } }): void => {
-    console.log("dd", data.target.value);
     //@ts-ignore
     addAccessoriesFormikRef.current.setFieldValue(data.target.name, data.target.value);
   };

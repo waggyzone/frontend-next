@@ -19,6 +19,17 @@ export const CreateUserValidationSchema = Yup.object().shape({
     ),
 });
 
+export const ChangePasswordValidationSchema = Yup.object().shape({
+  currentpassword: Yup.string().required("Required"),
+  changepassword: Yup.string()
+    .min(8)
+    .required("Required")
+    .matches(
+      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@|$!%*#?&\-^()_+="',./:;<>[\]{}`~\\\s])[A-Za-z\d@|$!%*#?&\-^()_+="',./:;<>[\]{}`~\\\s]{8,}$/,
+      "Include 1 Alphabet, Number & a SpecialCharacter"
+    ),
+});
+
 export const CreateProductValidationSchema = Yup.object().shape({
   name: Yup.string().required("Required"),
   brandname: Yup.string().required("Required"),
@@ -43,4 +54,11 @@ export const ContactValidationSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Required"),
   subject: Yup.string().required("Required"),
   message: Yup.string().required("Required"),
+});
+
+export const UpdateUserValidationSchema = Yup.object().shape({
+  firstName: Yup.string().required("Required"),
+  lastName: Yup.string().required("Required"),
+  age: Yup.number().required().max(100),
+  username: Yup.string().required("Required"),
 });

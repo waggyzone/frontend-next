@@ -12,12 +12,13 @@ const Card: React.FC<{
   onEdit?: MouseEventHandler<HTMLButtonElement>;
   onDelete?: MouseEventHandler<HTMLButtonElement>;
   onAdd: Function;
+  image?: string;
 }> = ({ id, title, size, price, color, onEdit, onDelete, onAdd, image, ...restProps }) => {
   const [quantity, setQuantity] = useState(1);
   const { data: session, status } = useSession();
-  console.log("hia");
+
   return (
-    <div className="rounded-md overflow-hidden shadow-lg bg-white" key={restProps.key}>
+    <div className="rounded-md overflow-hidden shadow-lg bg-white" key={id}>
       <div className=" flex flex-1 py-2">
         <div className="flex-[0.9]  flex gap-2  ">
           {image ? (

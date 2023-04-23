@@ -133,4 +133,13 @@
   .custom-radius {
     border-radius: 0% 0% 49% 50% / 0% 0% 14% 14%;
   }
+  .removeArrows {
+    -moz-appearance: textfield;
+    appearance: textfield;
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+  }
 }

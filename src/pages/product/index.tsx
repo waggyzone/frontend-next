@@ -37,7 +37,6 @@ const Product: NextPage<{ data: [product] }> = ({ data }) => {
       toast.success(`${result.count} Item added to cart`);
     }
   };
-  console.log("product", session);
 
   return (
     <div className="pt-32 w-screen">
@@ -54,7 +53,7 @@ const Product: NextPage<{ data: [product] }> = ({ data }) => {
           ) : null}
         </div>
         <div className=" grid grid-cols-2 gap-4">
-          {Array.from(data).map((data) => (
+          {data?.map((data) => (
             //@ts-ignore
             <Card
               key={data._id}
@@ -83,7 +82,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const result: product = await ProductService.findAll().then((promise) => promise);
   return {
     props: {
-      data: result,
+      data: result ?? [],
     },
   };
 };
