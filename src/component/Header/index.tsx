@@ -18,11 +18,11 @@ const Header: React.FC = () => {
    * @param event
    */
   const onLogOutClick = async (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    // event.preventDefault();
-    signOut();
+    event.preventDefault();
 
     if (session) {
       await userService.clearCache(session?.user.refresh_token);
+      signOut();
     }
   };
   /**

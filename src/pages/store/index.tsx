@@ -1,6 +1,6 @@
 import { NextPage } from "next";
 import Card from "@/component/Card/store";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import StoreService from "@/service/store";
 import DogLoader from "@/component/Loader/DogLoader";
 import Search from "@/component/Search";
@@ -13,6 +13,9 @@ const categories = [
 const Store: NextPage = () => {
   const { data, isLoading } = StoreService.getAll();
   const [resultData, setResultData] = useState(data);
+  useEffect(() => {
+    setResultData(data);
+  }, [data]);
   const onSearch = (filterValue: string, value: string) => {
     if (value) {
       const result = data.filter((val) => {

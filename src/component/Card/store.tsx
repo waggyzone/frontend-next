@@ -2,6 +2,8 @@ import { useSession } from "next-auth/react";
 import React, { MouseEventHandler, useState } from "react";
 import Button from "../Button";
 import Image from "next/image";
+import BaseIcon from "../BaseIcon";
+import { mdiAccount, mdiPhone } from "@mdi/js";
 
 const Card: React.FC<{
   id: string;
@@ -20,7 +22,7 @@ const Card: React.FC<{
   const { data: session, status } = useSession();
 
   return (
-    <div className="rounded-md overflow-hidden shadow-lg bg-white" key={restProps.key}>
+    <div className="rounded-md overflow-hidden w-full shadow-lg bg-white" key={restProps.key}>
       <div className=" flex flex-1 py-2">
         <div className="flex-[0.9]  flex gap-2  ">
           <div className="flex-[0.40]">
@@ -68,9 +70,16 @@ const Card: React.FC<{
                 </span>
               </div>
             </div>
-            <div className=" w-full">
-              {owner.firstName} {owner.lastName}
-              <span>{owner?.mobile}</span>
+            <div className=" w-full flex flex-col justify-start items-start">
+              <span>
+                <BaseIcon path={mdiAccount} w="w-10" h="h-10" />
+                {owner.firstName} {owner.lastName}
+              </span>
+
+              <span>
+                {owner?.phonenumber ? <BaseIcon path={mdiPhone} w="w-10" h="h-10" /> : null}
+                {owner?.phonenumber}
+              </span>
             </div>
           </div>
         </div>
