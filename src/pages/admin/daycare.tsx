@@ -5,7 +5,7 @@ import DeleteIcon from "@/component/Icon/Delete.Icon";
 import DogLoader from "@/component/Loader/DogLoader";
 import SleepingSloth from "@/component/Loader/SleepingSloth";
 import StraightLoader from "@/component/Loader/StraightLoader";
-import Groomer from "@/service/Groomer";
+\;
 import daycare from "@/service/daycare";
 import { Form, Formik } from "formik";
 import Head from "next/head";
@@ -38,7 +38,7 @@ const DayCare = () => {
   const onGroomerSubmit = (values: typeof initialValue, { resetForm }) => {
     if (stage === "create") {
       (async () =>
-        await Groomer.create(values).then((promise) => {
+        await daycare.create(values).then((promise) => {
           resetForm();
           toast.success("Added new Groomer");
           mutate();
@@ -47,7 +47,7 @@ const DayCare = () => {
     }
     if (stage === "edit") {
       (async () => {
-        await Groomer.udpateGroomerById(editId, values).then((promiose) => {
+        await daycare.udpateDaycareById(editId, values).then((promiose) => {
           resetForm();
           setGroomerData(initialValue);
           toast.success("Updated");
@@ -59,7 +59,7 @@ const DayCare = () => {
   };
   const deleteUserById = async (id: string) => {
     setGroomerData(initialValue);
-    await Groomer.removeUserById(id).then((result) => {
+    await daycare.removeUserById(id).then((result) => {
       console.log("re", result);
       toast.success("User Removed");
       mutate();
