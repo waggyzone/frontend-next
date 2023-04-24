@@ -14,7 +14,7 @@ const initialValue = {
   lastName: "",
   age: 18,
   username: "",
-  phonenumber: 0,
+  phonenumber: "",
   password: "",
 };
 
@@ -46,7 +46,7 @@ const Register: NextPage = () => {
       toast.success("Account Created successfully", {
         position: "top-center",
       });
-      Router.push("/");
+      Router.push("/auth/login");
     }
   };
   /**

@@ -41,7 +41,7 @@ const Store: NextPage = () => {
         </div>
       ) : (
         <div className="container mx-auto py-32">
-          <div>
+          <div className="mb-3">
             <Search
               placeHolder="Seach by Name ,Brand Name and Price"
               filterData={categories}

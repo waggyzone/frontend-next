@@ -141,7 +141,7 @@ const Grommer = () => {
                   onChange={(event: any) => handleChange(event)}
                 />
 
-                <div className="w-auto">
+                <div className="w-auto flex justify-center items-center gap-4">
                   <button
                     type="submit"
                     className="w-40 bg-[#FF3E4D] p-2 h-14 rounded-[0.75rem] text-black hover:bg-emerald-500 hover:text-green-900 flex justify-center items-center">
@@ -150,6 +150,14 @@ const Grommer = () => {
                     ) : (
                       <span>{groomerData.name ? "Edit" : "Create"}</span>
                     )}
+                  </button>
+                  <button
+                    onClick={() => {
+                      setGroomerData(initialValue);
+                    }}
+                    type="button"
+                    className="w-40 bg-[#4b57f8] p-2 h-14 rounded-[0.75rem] text-black hover:bg-emerald-500 hover:text-green-900 flex justify-center items-center">
+                    <span>Reset</span>
                   </button>
                 </div>
               </div>

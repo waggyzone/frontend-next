@@ -15,29 +15,29 @@ const Profile: NextPage<{ slug?: string[] }> = ({ slug = "user" }) => {
           <button
             onClick={() => setCurrentPage("profile")}
             className={` ${
-              currentPage === "profile" ? "bg-blue-500" : "bg-transparent"
+              currentPage === "profile" ? "text-blue-500" : "bg-transparent"
             } hover:bg-green-200 w-full text-start`}>
             Profile
           </button>
-          <button
+          {/* <button
             onClick={() => setCurrentPage("contact")}
             className={` ${
-              currentPage === "contact" ? "bg-blue-500" : "bg-transparent"
+              currentPage === "contact" ? "text-blue-500" : "bg-transparent"
             } hover:bg-green-200 w-full text-start`}>
             Contact
-          </button>
+          </button> */}
 
           <button
             onClick={() => setCurrentPage("order")}
             className={` ${
-              currentPage === "order" ? "bg-blue-500" : "bg-transparent"
+              currentPage === "order" ? "text-blue-500" : "bg-transparent"
             } hover:bg-green-200 w-full text-start`}>
             Order History
           </button>
           <button
             onClick={() => setCurrentPage("changepassword")}
             className={` ${
-              currentPage === "changepassword" ? "bg-blue-500" : "bg-transparent"
+              currentPage === "changepassword" ? "text-blue-500" : "bg-transparent"
             } hover:bg-green-200 w-full text-start`}>
             Change Password
           </button>

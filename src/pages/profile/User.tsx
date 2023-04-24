@@ -89,6 +89,16 @@ const User: React.FC = () => {
           <InputBox
             inputClassName="login__container__input"
             labelClassName="login__container__label"
+            id="phonenumber"
+            label="Phone Number"
+            name="phonenumber"
+            type="number"
+            placeholder="Enter Username"
+            onChange={(event: any) => handleChange(event)}
+          />
+          <InputBox
+            inputClassName="login__container__input"
+            labelClassName="login__container__label"
             id="age"
             label="Age"
             name="age"
