@@ -64,3 +64,13 @@ export type createGroomer = {
   services: string;
   rating: number;
 };
+export type createTrainer = {
+  _id?: string;
+  name: string;
+  location: string;
+  charge: number;
+  contact: number;
+  services: string;
+  rating: number;
+};
+
