@@ -80,3 +80,17 @@ export const GroomerValidationSchema = Yup.object().shape({
   services: Yup.string().required("Required"),
   rating: Yup.number().required("Required").max(5, "Maximum 5"),
 });
+export const TrainerValidationSchema = Yup.object().shape({
+  name: Yup.string().required("Required"),
+  location: Yup.string().required("Required"),
+  charge: Yup.number().required("Required").min(10, "Minimum price  10"),
+  contact: Yup.string()
+    .matches(
+      /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/,
+      "Phone number is not valid"
+    )
+    .max(10, "Provide 10 digit number"),
+  services: Yup.string().required("Required"),
+  rating: Yup.number().required("Required").max(5, "Maximum 5"),
+});
+
