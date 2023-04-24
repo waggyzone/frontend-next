@@ -23,7 +23,7 @@ const MenuItem: React.FC<{ item?: MenuAsideItem }> = ({ item, ...restProps }) =>
         isLinkActive ? "text-black" : "text-blue-600"
       } rounded-sm hover:text-black p-2  w-auto  `}>
       {item?.href ? (
-        <Link href={item.href} className="w-full bg-red-500 items-center flex justify-between">
+        <Link href={item.href} className="w-full items-center flex justify-between">
           {item?.icon ? (
             <BaseIcon path={item.icon} className="flex-none" w="w-11" size="18" />
           ) : null}

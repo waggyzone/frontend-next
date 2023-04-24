@@ -10,6 +10,7 @@ const useFetcher = (url: string) => {
     data: data,
     isLoading: !error && !data,
     error: error,
+    mutate: mutate,
   };
 };
 

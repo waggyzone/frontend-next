@@ -16,7 +16,6 @@ export const authOptions: NextAuthOptions = {
           })
           .then((promise) => promise.data)
           .catch((error) => {
-            console.log("eer", error);
             throw new Error(error);
           });
         if (result) {

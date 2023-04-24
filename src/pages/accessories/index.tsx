@@ -8,9 +8,19 @@ import Router from "next/router";
 import { toast } from "react-hot-toast";
 import { accessories } from "../types/types";
 import cartService from "@/service/cart";
+import { useState } from "react";
+import Search from "@/component/Search";
+
+const categories = [
+  { label: "All", value: "" },
+  { label: "Name", value: "name" },
+  { label: "Color", value: "color" },
+  { label: "Price", value: "price" },
+];
 
 const Accessories: NextPage<{ data: [accessories] }> = ({ data }) => {
   const { status } = useSession();
+  const [resultData, setResultData] = useState<accessories[]>(data);
   const onEditAccessories = (key: string | undefined) => {
     Router.push(`/accessories/edit/${key}`);
   };
@@ -36,6 +46,28 @@ const Accessories: NextPage<{ data: [accessories] }> = ({ data }) => {
       toast.success(`${result.count} Item added to cart`);
     }
   };
+
+  const onSearch = (filterValue: string, value: string) => {
+    if (value) {
+      const result = data.filter((val) => {
+        if (filterValue === "name") {
+          return val.name.toLowerCase().includes(value.toLowerCase());
+        }
+        if (filterValue === "color") {
+          return val.color.toLowerCase().includes(value.toLowerCase());
+        }
+        if (filterValue === "price") {
+          return val.price === Number(value);
+        }
+        return val.name.toLowerCase().includes(value.toLowerCase());
+      });
+      console.log("resu", result);
+      setResultData(result);
+    } else {
+      setResultData(data);
+    }
+  };
+
   return (
     <div className="pt-32 w-screen">
       <Head>
@@ -52,8 +84,15 @@ const Accessories: NextPage<{ data: [accessories] }> = ({ data }) => {
             </Link>
           ) : null}
         </div>
+        <div className="pb-2">
+          <Search
+            placeHolder="Seach by Name ,Brand Name and Price"
+            filterData={categories}
+            onSearchClik={onSearch}
+          />
+        </div>
         <div className=" grid grid-cols-2 gap-4">
-          {Array.from(data).map((data) => (
+          {Array.from(resultData).map((data) => (
             <Card
               key={data._id}
               id={data._id}

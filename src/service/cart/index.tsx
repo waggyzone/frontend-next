@@ -1,4 +1,5 @@
 import { apiClient } from "@/common/apiClient";
+import { useFetcher } from "@/hook/useFertcher";
 import { cart } from "@/pages/types/types";
 import { promises } from "dns";
 class CartService {
@@ -11,6 +12,10 @@ class CartService {
         throw new Error(error);
       });
   };
+
+  findAllCartItemsCount = () => useFetcher(`${process.env.NEXT_PUBLIC_API_URL}/cart/find`);
+  findAllOrder = () => useFetcher(`${process.env.NEXT_PUBLIC_API_URL}/cart/orders`);
+
   findAllCartItems = async () =>
     await apiClient
       .get(`/cart/find`)
@@ -20,7 +25,6 @@ class CartService {
         }
       })
       .catch((error) => {
-        console.log("cart", error);
         throw new Error(error);
       });
 
@@ -41,6 +45,14 @@ class CartService {
   removeCartItemById = async (id: string | undefined) =>
     await apiClient
       .delete(`/cart/remove/item/${id}`)
+      .then((promise) => promise.data)
+      .catch((error) => {
+        throw new Error(error);
+      });
+
+  createOrder = async () =>
+    await apiClient
+      .post("/cart/create/order")
       .then((promise) => promise.data)
       .catch((error) => {
         throw new Error(error);

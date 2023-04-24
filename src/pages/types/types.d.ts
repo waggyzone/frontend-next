@@ -6,6 +6,13 @@ export type createUser = {
   password: string;
 };
 
+export type UpdateUser = {
+  firstName: string;
+  lastName: string;
+  age: number;
+  username: string;
+};
+
 export type UserRoleUpdate = {
   role: string;
 };
@@ -41,8 +48,18 @@ export type store = {
 
 export type cart = {
   _id?: string;
-  product_id: string;
-  accessories_id: string;
-  count: number;
-  status: string;
+  product_id?: string;
+  accessories_id?: string;
+  count?: number;
+  status?: string;
+};
+
+export type createGroomer = {
+  _id?: string;
+  name: string;
+  location: string;
+  charge: number;
+  contact: number;
+  services: string;
+  rating: number;
 };

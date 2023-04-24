@@ -1,5 +1,6 @@
 import AdminLayout from "@/component/AdminLayout";
 import DeleteIcon from "@/component/Icon/Delete.Icon";
+import DogLoader from "@/component/Loader/DogLoader";
 import Table from "@/component/Table";
 import { useFetcher } from "@/hook/useFertcher";
 import user from "@/service/user";
@@ -8,12 +9,12 @@ import React, { ReactElement, useCallback, useState } from "react";
 import { toast } from "react-hot-toast";
 import ReactPaginate from "react-paginate";
 import Swal from "sweetalert2";
-import { mutate } from "swr";
+
 const User = () => {
   const [skip, setSkip] = useState(0);
   const perPage = 5;
 
-  const { data, isLoading, error } = user.getAllUser(skip + 1, perPage);
+  const { data, isLoading, error, mutate } = user.getAllUser(skip + 1, perPage);
 
   const onChangeOption = (event: any, id: string) => {
     const _selected = event.currentTarget.value;
@@ -25,15 +26,25 @@ const User = () => {
       cancelButtonText: "No",
     }).then((result) => {
       if (result.isConfirmed) {
-        const data = { role: event };
-        user.udpateUserById(id, data).then((result) => {
+        const data = { role: _selected };
+        user.modifyUserById(id, data).then((result) => {
           Swal.fire("Saved!", "", "success");
+          mutate();
         });
       } else {
-        mutate(data);
+        mutate();
       }
     });
   };
+
+  const deleteUserById = async (id: string) => {
+    await user.removeUserById(id).then((result) => {
+      console.log("re", result);
+      toast.success("User Removed");
+      mutate();
+    });
+  };
+
   return (
     <React.Fragment>
       <Head>
@@ -70,7 +81,9 @@ const User = () => {
                       </select>
                     </td>
                     <td>
-                      <button className="bg-orange-400 w-full items-center flex justify-center">
+                      <button
+                        className="w-full items-center flex justify-center "
+                        onClick={() => deleteUserById(data._id)}>
                         <DeleteIcon className="w-6 h-auto" />
                       </button>
                     </td>
@@ -89,7 +102,7 @@ const User = () => {
                   breakLabel="..."
                   nextLabel=">"
                   previousLabel="<"
-                  initialPage={1}
+                  initialPage={0}
                   pageRangeDisplayed={data[0].pagination[0].total}
                   pageCount={Math.ceil(data[0].pagination[0].total / perPage)}
                   onPageChange={(event) => {
@@ -100,7 +113,9 @@ const User = () => {
             </div>
           </div>
         ) : (
-          <p>Loadin</p>
+          <div className="w-full h-full flex justify-center items-center">
+            <DogLoader />
+          </div>
         )}
       </section>
     </React.Fragment>

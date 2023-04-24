@@ -29,7 +29,7 @@ const InputBox: React.FC = (props: any): JSX.Element => {
         onChange={(event) => props.onChange(event)}
         className={`${props.inputClassName}`}
       />
-      <span className="text-red-500 text-right">
+      <span className="text-red-500 text-right break-words whitespace-pre-wrap w-[inherit]">
         {meta.touched && meta.error ? meta.error : ""}
       </span>
     </div>

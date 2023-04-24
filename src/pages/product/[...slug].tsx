@@ -85,7 +85,6 @@ const Product: NextPage<{ slug?: string[]; data?: product }> = ({ slug = "add", 
    * @description setField values for the respective inputs
    */
   const handleChange = (data: { target: { name: any; value: any } }): void => {
-    console.log("dd", data.target.value);
     //@ts-ignore
     addProductFormikRef.current.setFieldValue(data.target.name, data.target.value);
   };
@@ -131,7 +130,6 @@ const Product: NextPage<{ slug?: string[]; data?: product }> = ({ slug = "add", 
               label="Product Price"
               name="price"
               type="number"
-              value={data?.price}
               placeholder="Enter a Product Price"
               onChange={(event: any) => handleChange(event)}
             />

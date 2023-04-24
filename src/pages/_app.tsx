@@ -1,6 +1,8 @@
 //@ts-nocheck
 import Layout from "@/component/Layout";
 import DogLoader from "@/component/Loader/DogLoader";
+import StateProvider from "@/context/waggyContext";
+import { useFetcher } from "@/hook/useFertcher";
 import "@/styles/globals.scss";
 import { Prompt } from "@next/font/google";
 import type { Session } from "next-auth";
@@ -18,10 +20,14 @@ export default function App({
   pageProps: { session, ...pageProps },
 }: AppProps<{ session: Session }>) {
   const getLayout = Component.getLayout || ((page) => page);
+
   return (
     <SessionProvider session={session}>
-      <SWRConfig>
-        <RecoilRoot>
+      <StateProvider>
+        <SWRConfig
+          value={{
+            fetcher: useFetcher,
+          }}>
           <Layout className={prompt.className}>
             <Toaster position="top-right" reverseOrder={false} gutter={8} containerClassName="" />
             {Component.auth ? (
@@ -30,8 +36,8 @@ export default function App({
               <React.Fragment>{getLayout(<Component {...pageProps} />)}</React.Fragment>
             )}
           </Layout>
-        </RecoilRoot>
-      </SWRConfig>
+        </SWRConfig>
+      </StateProvider>
     </SessionProvider>
   );
 }
