@@ -73,4 +73,12 @@ export type createTrainer = {
   services: string;
   rating: number;
 };
-
+export type createDaycare = {
+  _id?: string;
+  name: string;
+  location: string;
+  charge: number;
+  contact: number;
+  services: string;
+  rating: number;
+};

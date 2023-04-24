@@ -1,5 +1,12 @@
 import { MenuAsideItem } from "@/interfaces";
-import { mdiAccount, mdiMonitor, mdiScissorsCutting, mdiStocking } from "@mdi/js";
+import {
+  mdiAccount,
+  mdiDoctor,
+  mdiMonitor,
+  mdiScissorsCutting,
+  mdiStocking,
+  mdiTable,
+} from "@mdi/js";
 
 export const menuAside: MenuAsideItem[] = [
   {
@@ -7,11 +14,11 @@ export const menuAside: MenuAsideItem[] = [
     icon: mdiMonitor,
     label: "Dashboard",
   },
-  {
-    href: "/admin/stock",
-    icon: mdiStocking,
-    label: "Stock",
-  },
+  // {
+  //   href: "/admin/stock",
+  //   icon: mdiStocking,
+  //   label: "Stock",
+  // },
   {
     href: "/admin/user",
     icon: mdiAccount,
@@ -22,9 +29,14 @@ export const menuAside: MenuAsideItem[] = [
     icon: mdiScissorsCutting,
     label: "Grommer",
   },
-  // {
-  //   href: "/admin/store",
-  //   icon: mdiScissorsCutting,
-  //   label: "Store",
-  // },
+  {
+    href: "/admin/daycare",
+    icon: mdiDoctor,
+    label: "Daycare",
+  },
+  {
+    href: "/admin/trainer",
+    icon: mdiTable,
+    label: "Trainer ",
+  },
 ];
