@@ -1,11 +1,12 @@
 import BaseIcon from "@/component/BaseIcon";
 import DogLoader from "@/component/Loader/DogLoader";
 import Groomer from "@/service/Groomer";
+import Trainer from "@/service/Trainer";
 import { mdiStar } from "@mdi/js";
 import { GetServerSideProps, NextPage } from "next";
 
 const Training: NextPage = () => {
-  const { data, isLoading } = Groomer.findGroomer();
+  const { data, isLoading } = Trainer.findGTrainer();
 
   return (
     <div className=" w-screen h-screen container mx-auto pt-20">
