@@ -1,11 +1,12 @@
 import BaseIcon from "@/component/BaseIcon";
 import DogLoader from "@/component/Loader/DogLoader";
 import Groomer from "@/service/Groomer";
+import daycare from "@/service/daycare";
 import { mdiStar } from "@mdi/js";
 import { GetServerSideProps, NextPage } from "next";
 
 const Daycare: NextPage = () => {
-  const { data, isLoading } = Groomer.findGroomer();
+  const { data, isLoading } = daycare.findDaycare();
 
   return (
     <div className=" w-screen h-screen container mx-auto pt-20">

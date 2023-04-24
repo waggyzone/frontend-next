@@ -2,7 +2,6 @@ import { apiClient } from "@/common/apiClient";
 import { useFetcher } from "@/hook/useFertcher";
 import { createTrainer } from "@/pages/types/types";
 
-
 class TrainerService {
   findGTrainer = () => {
     return useFetcher(`${process.env.NEXT_PUBLIC_API_URL}/trainer/all`);
@@ -29,4 +28,3 @@ class TrainerService {
 }
 
 export default new TrainerService();
-

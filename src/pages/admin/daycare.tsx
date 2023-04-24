@@ -5,7 +5,6 @@ import DeleteIcon from "@/component/Icon/Delete.Icon";
 import DogLoader from "@/component/Loader/DogLoader";
 import SleepingSloth from "@/component/Loader/SleepingSloth";
 import StraightLoader from "@/component/Loader/StraightLoader";
-\;
 import daycare from "@/service/daycare";
 import { Form, Formik } from "formik";
 import Head from "next/head";
