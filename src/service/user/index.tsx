@@ -6,6 +6,9 @@ class UserService {
   findUser = () => {
     return useFetcher(`${process.env.NEXT_PUBLIC_API_URL}/user`);
   };
+  findAllUser = () => {
+    return useFetcher(`${process.env.NEXT_PUBLIC_API_URL}/user/all`);
+  };
   create = (data: createUser) =>
     apiClient
       .post(`/user/create`, data)

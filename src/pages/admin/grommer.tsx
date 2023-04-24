@@ -14,15 +14,10 @@ import ReactPaginate from "react-paginate";
 
 const initialValue = {
   name: "",
-
   location: "",
-
   charge: 0,
-
   contact: 0,
-
   services: "",
-
   rating: 0,
 };
 
