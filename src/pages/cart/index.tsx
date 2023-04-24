@@ -5,6 +5,7 @@ import { NextPage } from "next";
 import Head from "next/head";
 import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
+import Swal from "sweetalert2";
 
 const Cart: NextPage = () => {
   // const [data, setData] = useState([]);
@@ -47,7 +48,12 @@ const Cart: NextPage = () => {
   };
 
   const onMakePayment = async (event: any) => {
-    const result = await cartService.createOrder();
+    const result = await cartService.createOrder().then((promise) => {
+      Swal.fire({
+        icon: "success",
+        title: "Order Created SuccessFully",
+      });
+    });
     console.log("result create", result);
   };
 

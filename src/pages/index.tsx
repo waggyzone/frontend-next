@@ -1,6 +1,7 @@
 import Contact from "@/component/Contact";
 import { Inter } from "@next/font/google";
 import Head from "next/head";
+import Link from "next/link";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -45,31 +46,40 @@ export default function Home() {
               </h4>
             </div>
             <div className="w-full  flex  justify-between items-center">
-              <div className="m-4 flex flex-col justify-between items-center gap-5 ">
-                <span className="font-bond text-black text-2xl flex justify-between ">
-                  GROOMING
-                </span>
-                <img
-                  src="Images/grooming.jpg"
-                  className="w-[20rem] h-[15rem] rounded-full shadow-2xl hover:scale-125 transition-all"
-                />
-              </div>
-              <div className="m-4 flex flex-col justify-between items-center gap-5">
-                <span className="font-bond text-black text-2xl flex justify-between ">DAYCARE</span>
-                <img
-                  src="Images/daycare.jpeg"
-                  className="w-[20rem] h-[15rem] rounded-full shadow-2xl  hover:scale-125 transition-all "
-                />
-              </div>
-              <div className="m-4 flex flex-col justify-between items-center gap-5 ">
-                <span className="font-bond text-black text-2xl flex justify-between ">
-                  TRAINING
-                </span>
-                <img
-                  src="Images/training.webp"
-                  className="w-[20rem] h-[15rem] rounded-full shadow-2xl hover:scale-125 transition-all"
-                />
-              </div>
+              <Link href="/grooming">
+                <div className="m-4 flex flex-col justify-between items-center gap-5 ">
+                  <span className="font-bond text-black text-2xl flex justify-between ">
+                    GROOMING
+                  </span>
+                  <img
+                    src="Images/grooming.jpg"
+                    className="w-[20rem] h-[15rem] rounded-full shadow-2xl hover:scale-125 transition-all"
+                  />
+                </div>
+              </Link>
+
+              <Link href="/daycare">
+                <div className="m-4 flex flex-col justify-between items-center gap-5">
+                  <span className="font-bond text-black text-2xl flex justify-between ">
+                    DAYCARE
+                  </span>
+                  <img
+                    src="Images/daycare.jpeg"
+                    className="w-[20rem] h-[15rem] rounded-full shadow-2xl  hover:scale-125 transition-all "
+                  />
+                </div>
+              </Link>
+              <Link href="/training">
+                <div className="m-4 flex flex-col justify-between items-center gap-5 ">
+                  <span className="font-bond text-black text-2xl flex justify-between ">
+                    TRAINING
+                  </span>
+                  <img
+                    src="Images/training.webp"
+                    className="w-[20rem] h-[15rem] rounded-full shadow-2xl hover:scale-125 transition-all"
+                  />
+                </div>
+              </Link>
             </div>
           </div>
           {/* <div className="bg-white-500 w-screen h-screen container mx-auto">
