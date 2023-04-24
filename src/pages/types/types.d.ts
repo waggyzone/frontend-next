@@ -53,3 +53,13 @@ export type cart = {
   count?: number;
   status?: string;
 };
+
+export type createGroomer = {
+  _id?: string;
+  name: string;
+  location: string;
+  charge: number;
+  contact: number;
+  services: string;
+  rating: number;
+};

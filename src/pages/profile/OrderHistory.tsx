@@ -1,3 +1,6 @@
+import DogLoader from "@/component/Loader/DogLoader";
+import SleepingSloth from "@/component/Loader/SleepingSloth";
+import StraightLoader from "@/component/Loader/StraightLoader";
 import cartService from "@/service/cart";
 
 const OrderHistory: React.FC = () => {
@@ -27,44 +30,50 @@ const OrderHistory: React.FC = () => {
   return (
     <div>
       {!isLoading ? (
-        <div className="overflow-hidden rounded-lg border border-gray-200 shadow-md m-5 text-black">
-          <table className="table-auto w-full border-collapse bg-white text-left text-sm ">
-            <thead className="bg-gray-400">
-              <tr className="gap-5">
-                <th scope="col">Item Name</th>
-                <th scope="col">Price</th>
-                <th scope="col">Quantity</th>
-                <th scope="col">Total</th>
-              </tr>
-            </thead>
-            <tbody>
-              {data?.map((_data: any, index: number) => (
-                // <Card title={_data?.product_id?.brandname ?? _data?.accessories_id?.name} />
-
-                <tr key={index} className="px-4 py-6 mx-4">
-                  <td>{_data?.product_id?.brandname ?? _data?.accessories_id?.name}</td>
-                  <td>{_data?.product_id?.price ?? _data?.accessories_id?.price}</td>
-                  <td>{_data.count}</td>
-                  <td>
-                    {getItemAmout(
-                      _data?.count,
-                      _data?.product_id?.price ?? _data?.accessories_id?.price
-                    )}
-                  </td>
+        data.length ? (
+          <div className="overflow-hidden rounded-lg border border-gray-200 shadow-md m-5 text-black">
+            <table className="table-auto w-full border-collapse bg-white text-left text-sm ">
+              <thead className="bg-gray-400">
+                <tr className="gap-5">
+                  <th scope="col">Item Name</th>
+                  <th scope="col">Price</th>
+                  <th scope="col">Quantity</th>
+                  <th scope="col">Total</th>
                 </tr>
-              ))}
-              <tr>
-                <td>Total</td>
-                <td></td>
-                <td></td>
-                <td>{totalAmount(data)}</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+              </thead>
+              <tbody>
+                {data?.map((_data: any, index: number) => (
+                  // <Card title={_data?.product_id?.brandname ?? _data?.accessories_id?.name} />
+
+                  <tr key={index} className="px-4 py-6 mx-4">
+                    <td>{_data?.product_id?.brandname ?? _data?.accessories_id?.name}</td>
+                    <td>{_data?.product_id?.price ?? _data?.accessories_id?.price}</td>
+                    <td>{_data.count}</td>
+                    <td>
+                      {getItemAmout(
+                        _data?.count,
+                        _data?.product_id?.price ?? _data?.accessories_id?.price
+                      )}
+                    </td>
+                  </tr>
+                ))}
+                <tr>
+                  <td>Total</td>
+                  <td></td>
+                  <td></td>
+                  <td>{totalAmount(data)}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        ) : (
+          <div className="flex justify-center items-center h-screen">
+            <SleepingSloth className="w-56 h-56" />
+          </div>
+        )
       ) : (
         <div className="w-full h-full flex justify-center items-center text-3xl">
-          <h1>No Item In Cart</h1>
+          <DogLoader />
         </div>
       )}
     </div>

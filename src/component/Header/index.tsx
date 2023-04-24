@@ -92,6 +92,15 @@ const Header: React.FC = () => {
           href="/profile">
           Profile
         </Link>
+        {session?.user.role === "admin" ? (
+          <Link
+            className={`${
+              asPath === "/admin" ? "border-black border-b" : ""
+            } hover:text-emerald-600 hover:border-red-700 hover:border-b transition-all`}
+            href="/admin">
+            Me
+          </Link>
+        ) : null}
 
         {status === "authenticated" ? (
           <button onClick={(event) => onLogOutClick(event)}>Logout</button>

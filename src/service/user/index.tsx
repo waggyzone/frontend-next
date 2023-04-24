@@ -20,6 +20,17 @@ class UserService {
       .put(`/user/update`, data)
       .then((promise) => promise.data)
       .catch((error) => error);
+  modifyUserById = (id: string, data: UpdateUser | UserRoleUpdate) =>
+    apiClient
+      .put(`/user/update/${id}`, data)
+      .then((promise) => promise.data)
+      .catch((error) => error);
+
+  removeUserById = (id: string) =>
+    apiClient
+      .delete(`/user/remove/${id}`)
+      .then((promise) => promise.data)
+      .catch((error) => error);
 
   clearCache = (token: string) =>
     apiClient

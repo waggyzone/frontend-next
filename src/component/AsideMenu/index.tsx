@@ -7,7 +7,10 @@ const AsideMenu: React.FC = () => {
   return (
     <aside className="fixed lg:py-2 lg:pl-2 w-40 left-0 top-0 h-screen transition-position overflow-hidden">
       <div className="flex-1 overflow-y-auto overflow-x-hidden lg:rounded-2xl bg-white  !w-full h-screen">
-        <div> {session?.user.name ?? "Guest"}</div>
+        <div className=" bg-slate-600 rounded-md shadow-lg flex justify-center items-center">
+          {" "}
+          {session?.user.name ?? "Guest"}
+        </div>
         {menuAside?.map((data, index) => (
           <MenuItem item={data} key={index} />
         ))}

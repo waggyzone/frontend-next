@@ -9,12 +9,12 @@ import React, { ReactElement, useCallback, useState } from "react";
 import { toast } from "react-hot-toast";
 import ReactPaginate from "react-paginate";
 import Swal from "sweetalert2";
-import { mutate } from "swr";
+
 const User = () => {
   const [skip, setSkip] = useState(0);
   const perPage = 5;
 
-  const { data, isLoading, error } = user.getAllUser(skip + 1, perPage);
+  const { data, isLoading, error, mutate } = user.getAllUser(skip + 1, perPage);
 
   const onChangeOption = (event: any, id: string) => {
     const _selected = event.currentTarget.value;
@@ -26,15 +26,25 @@ const User = () => {
       cancelButtonText: "No",
     }).then((result) => {
       if (result.isConfirmed) {
-        const data = { role: event };
-        user.udpateUserById(id, data).then((result) => {
+        const data = { role: _selected };
+        user.modifyUserById(id, data).then((result) => {
           Swal.fire("Saved!", "", "success");
+          mutate();
         });
       } else {
-        mutate(data);
+        mutate();
       }
     });
   };
+
+  const deleteUserById = async (id: string) => {
+    await user.removeUserById(id).then((result) => {
+      console.log("re", result);
+      toast.success("User Removed");
+      mutate();
+    });
+  };
+
   return (
     <React.Fragment>
       <Head>
@@ -71,7 +81,9 @@ const User = () => {
                       </select>
                     </td>
                     <td>
-                      <button className="w-full items-center flex justify-center">
+                      <button
+                        className="w-full items-center flex justify-center "
+                        onClick={() => deleteUserById(data._id)}>
                         <DeleteIcon className="w-6 h-auto" />
                       </button>
                     </td>

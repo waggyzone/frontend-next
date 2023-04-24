@@ -10,6 +10,10 @@ export const CreateUserValidationSchema = Yup.object().shape({
   lastName: Yup.string().required("Required"),
   age: Yup.number().required().max(100),
   username: Yup.string().required("Required"),
+  phonenumber: Yup.string().matches(
+    /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/,
+    "Phone number is not valid"
+  ),
   password: Yup.string()
     .min(8)
     .required("Required")
@@ -61,4 +65,18 @@ export const UpdateUserValidationSchema = Yup.object().shape({
   lastName: Yup.string().required("Required"),
   age: Yup.number().required().max(100),
   username: Yup.string().required("Required"),
+});
+
+export const GroomerValidationSchema = Yup.object().shape({
+  name: Yup.string().required("Required"),
+  location: Yup.string().required("Required"),
+  charge: Yup.number().required("Required").min(10, "Minimum price  10"),
+  contact: Yup.string()
+    .matches(
+      /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/,
+      "Phone number is not valid"
+    )
+    .max(10, "Provide 10 digit number"),
+  services: Yup.string().required("Required"),
+  rating: Yup.number().required("Required").max(5, "Maximum 5"),
 });
