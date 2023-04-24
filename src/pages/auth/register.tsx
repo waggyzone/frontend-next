@@ -14,6 +14,7 @@ const initialValue = {
   lastName: "",
   age: 18,
   username: "",
+  phonenumber: 0,
   password: "",
 };
 
@@ -96,6 +97,16 @@ const Register: NextPage = () => {
               name="age"
               type="number"
               placeholder="Age"
+              onChange={(event: any) => handleChange(event)}
+            />
+            <InputBox
+              inputClassName="login__container__input"
+              labelClassName="login__container__label"
+              id="phonenumber"
+              label="Phone Number"
+              name="phonenumber"
+              type="number"
+              placeholder="Enter Phone Number"
               onChange={(event: any) => handleChange(event)}
             />
             <InputBox

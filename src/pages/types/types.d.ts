@@ -4,6 +4,7 @@ export type createUser = {
   age: number;
   username: string;
   password: string;
+  phonenumber: number;
 };
 
 export type UpdateUser = {
